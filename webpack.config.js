@@ -11,7 +11,12 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-    entry: APP_DIR + '/index.jsx',
+    entry: {
+        app: [
+            'react-hot-loader/patch',
+            APP_DIR + '/index.jsx'
+        ]
+    },
     output: {
         path: BUILD_DIR,
         filename: 'index_bundle.js'

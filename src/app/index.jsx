@@ -1,10 +1,20 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-class App extends React.Component {
-    render () {
-        return <p>Hello React!</p>;
-    }
-}
+import {AppContainer} from 'react-hot-loader';
+import RootContainer from './containers/RootContainer.jsx';
 
-render(<App/>, document.getElementById('app'));
+const renderWrapped = Component => {
+    render(
+        <AppContainer>
+            <Component />
+        </AppContainer>,
+        document.getElementById('root')
+    );
+};
+
+renderWrapped(RootContainer);
+
+if (module.hot) {
+    module.hot.accept('./index.jsx', () => { renderWrapped(RootContainer) });
+}
