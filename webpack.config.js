@@ -1,14 +1,20 @@
-var webpack = require('webpack');
-var path = require('path');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
-var APP_DIR = path.resolve(__dirname, 'src/client/app');
+const BUILD_DIR = path.resolve('dist');
+const APP_DIR = path.resolve('src/app');
 
-var config = {
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+    template: APP_DIR + '/index.html',
+    filename: 'index.html',
+    inject: 'body'
+});
+
+module.exports = {
     entry: APP_DIR + '/index.jsx',
     output: {
         path: BUILD_DIR,
-        filename: 'bundle.js'
+        filename: 'index_bundle.js'
     },
     module: {
         loaders: [
@@ -18,7 +24,6 @@ var config = {
                 loader: 'babel-loader'
             }
         ]
-    }
+    },
+    plugins: [HtmlWebpackPluginConfig]
 };
-
-module.exports = config;
