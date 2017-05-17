@@ -1,14 +1,20 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import mainReducer from './state/reducers';
+import { AppContainer } from 'react-hot-loader';
+import RootContainer from './components/containers/RootContainer.jsx';
 
-import {AppContainer} from 'react-hot-loader';
-import RootContainer from './containers/RootContainer.jsx';
+let store = createStore(mainReducer);
 
 const renderWrapped = Component => {
     render(
-        <AppContainer>
-            <Component />
-        </AppContainer>,
+        <Provider store={store}>
+            <AppContainer>
+                <Component />
+            </AppContainer>
+        </Provider>,
         document.getElementById('root')
     );
 };
