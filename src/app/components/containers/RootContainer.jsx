@@ -1,8 +1,15 @@
 import React from 'react';
-import MySamplePresentational from '../presentationals/MySamplePresentational.jsx';
+import { Switch, Route } from 'react-router-dom';
+import LandingPage from '../presentationals/LandingPage.jsx';
+import AboutPage from '../presentationals/AboutPage.jsx';
 
 export default class RootContainer extends React.Component {
     render () {
-        return <MySamplePresentational />;
+        return (
+            <Switch>
+                <Route exact path="/" component={LandingPage} />
+                <Route path="/about" component={AboutPage} />
+            </Switch>
+        );
     }
 }

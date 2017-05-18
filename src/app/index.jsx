@@ -3,24 +3,27 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import mainReducer from './state/reducers';
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer as HotLoader} from 'react-hot-loader';
+import { BrowserRouter } from 'react-router-dom';
 import RootContainer from './components/containers/RootContainer.jsx';
 
 let store = createStore(mainReducer);
 
-const renderWrapped = Component => {
+const renderRoot = () => {
     render(
-        <Provider store={store}>
-            <AppContainer>
-                <Component />
-            </AppContainer>
-        </Provider>,
-        document.getElementById('root')
+        <HotLoader>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <RootContainer/>
+                </BrowserRouter>
+            </Provider>
+        </HotLoader>,
+    document.getElementById('root')
     );
 };
 
-renderWrapped(RootContainer);
+renderRoot();
 
 if (module.hot) {
-    module.hot.accept('./index.jsx', () => { renderWrapped(RootContainer) });
+    module.hot.accept('./index.jsx', renderRoot);
 }
