@@ -11,4 +11,6 @@ Install node and npm and assign the following aliases:
 2. npm install
 
 ## Usage
-- npm start - To start the server at `localhost:8080` with enabled hot reloading
+- npm run server - To start the server at `localhost:8080` with enabled hot reloading
+- npm run build:dev - To build the dist files for the dev environment
+- npm run build:prod - To build the dist files for the prod environment

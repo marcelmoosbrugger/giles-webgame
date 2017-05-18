@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --historyApiFallback"
+    "server": "webpack-dev-server --env=dev --hot --historyApiFallback",
+    "build:dev": "webpack --env=dev --progress --profile --colors",
+    "build:prod": "webpack --env=prod --progress --profile --colors --optimize-minimize --define process.env.NODE_ENV=\"'production'\""
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +31,7 @@
     "sass-loader": "^6.0.5",
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.0"
   }
 }
