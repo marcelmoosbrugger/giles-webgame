@@ -18,6 +18,13 @@ $neutralColor2: #404040;
 $neutralColor3: #7F7F7F;
 $neutralColor4: #CFCFCF;
 
+$fa-font-path: "../../assets/fontawesome/fonts";
+@import "../../assets/fontawesome/scss/font-awesome";
+
+*[class^="fa"] {
+  @extend .fa;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif');
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 

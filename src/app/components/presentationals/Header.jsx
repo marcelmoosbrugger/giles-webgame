@@ -15,8 +15,13 @@ export default class Header extends React.Component {
     render () {
         return (
             <div className="header">
-                <Link to="/" className="logo">Gile's Game</Link>
-                <div className="author">Made with love by <a href="https://github.com/mmsbrggr">@mmsbrggr</a></div>
+                <Link to="/" className="logo">
+                    <span className="icon">&forall;</span>
+                    <span className="fa-heart icon"/>
+                    <span className="icon">&exist;</span>
+                    <span className="text">Gile's Game</span>
+                </Link>
+                <div className="author">Made with love by <a target="_blank" href="https://github.com/mmsbrggr">@mmsbrggr</a></div>
             </div>
         );
     }

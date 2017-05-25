@@ -22,9 +22,44 @@
   }
 
   .logo {
-    @include serif-font("Noto Serif");
     color: $mainColor1;
-    font-size: 28px;
+    font-size: 24px;
+
+    .text {
+      display: inline-block;
+      padding: 0 5px;
+      @include serif-font("Noto Serif");
+    }
+
+    .icon {
+      display: inline-block;
+      position: relative;
+      transition: color 0.2s, left 0.2s, top 0.2s;
+    }
+
+    .icon:nth-child(1) {
+      font-weight: bold;
+      top: 2px;
+      left: 10px;
+    }
+
+    .icon:nth-child(2) {
+      left: 4px;
+      color: $highlightColor
+    }
+
+    .icon:nth-child(3) {
+      font-weight: bold;
+      top: -5px;
+      left: 0;
+    }
+
+    &:hover {
+      .icon {
+        top: 0;
+        left: 0;
+      }
+    }
   }
 
   .author, .author * {

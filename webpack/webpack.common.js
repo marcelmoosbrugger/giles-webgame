@@ -12,6 +12,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const BUILD_DIR = path.resolve('dist');
 const APP_DIR = path.resolve('src/app');
+const SRC_DIR = path.resolve('src');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
     template: APP_DIR + '/index.html',
@@ -36,6 +37,11 @@ module.exports = {
                 test: /\.jsx?/,
                 include: APP_DIR,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+                include: SRC_DIR,
+                loader: 'file-loader?name=fonts/[name].[ext]'
             }
         ]
     },

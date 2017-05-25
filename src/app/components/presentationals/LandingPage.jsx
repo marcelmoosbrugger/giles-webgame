@@ -21,6 +21,7 @@ export default class LandingPage extends React.Component {
                         <li><Link to="/about" >About</Link></li>
                     </ul>
                 </nav>
+                <div className="background"/>
             </div>
         );
     }
