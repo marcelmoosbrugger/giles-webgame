@@ -1,0 +1,30 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+$baseColor: #ECF0F1;
+$highlightColor: #E74C3C;
+$mainColor1: #2C3E50;
+$mainColor2: #2980B9;
+$mainColor3: #3498DB;
+
+$neutralColor: #333333;
+$neutralColor2: #404040;
+$neutralColor3: #7F7F7F;
+$neutralColor4: #CFCFCF;
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
+@mixin serif-font($font) {
+  font-family: $font, "Times New Roman", Times, serif;
+}
+
+@mixin sans-serif-font($font) {
+  font-family: $font, Arial, Helvetica, sans-serif;
+}

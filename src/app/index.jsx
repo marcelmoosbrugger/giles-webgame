@@ -16,8 +16,10 @@ import { AppContainer as HotLoaderContainer} from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 import AppContainer from './components/containers/AppContainer.jsx';
 
+// Create the redux state store
 let store = createStore(mainReducer);
 
+// Renders the actual application wrapped in all necessary containers
 const renderApp = () => {
     render(
         <HotLoaderContainer>
@@ -31,8 +33,10 @@ const renderApp = () => {
     );
 };
 
+// render the the application upfront
 renderApp();
 
+// initialize the hot loading
 if (module.hot) {
     module.hot.accept('./index.jsx', renderApp);
 }

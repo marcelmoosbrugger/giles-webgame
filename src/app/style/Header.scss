@@ -1,0 +1,33 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.header {
+  height: 80px;
+  position: relative;
+  padding: 0 220px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1000;
+
+  & > * {
+    align-self: center;
+  }
+
+  .logo {
+    @include serif-font("Noto Serif");
+    color: $mainColor1;
+    font-size: 28px;
+  }
+
+  .author, .author * {
+    @include sans-serif-font("Noto Sans CJK JP Thin");
+  }
+}

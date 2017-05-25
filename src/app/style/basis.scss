@@ -1,0 +1,34 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "reset";
+@import "definitions";
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body > * {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  @include sans-serif-font("Noto Sans");
+  color: $neutralColor;
+}
+
+body {
+  background: $baseColor;
+}
+
+a {
+  color: $highlightColor;
+}

@@ -8,10 +8,20 @@
  */
 
 import React from 'react';
-import MySamplePresentational from './MySamplePresentational.jsx';
+import { Link } from 'react-router-dom';
+import '../../style/LandingPage.scss';
 
 export default class LandingPage extends React.Component {
     render() {
-        return <MySamplePresentational/>;
+        return (
+            <div className="landing-page">
+                <nav>
+                    <ul>
+                        <li><Link to="/" >New game</Link></li>
+                        <li><Link to="/about" >About</Link></li>
+                    </ul>
+                </nav>
+            </div>
+        );
     }
 }
