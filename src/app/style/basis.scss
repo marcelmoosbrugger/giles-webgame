@@ -32,3 +32,42 @@ body {
 a {
   color: $highlightColor;
 }
+
+p {
+  @include serif-font("Noto Serif");
+  margin-bottom: 20px;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background: $highlightColor;
+  line-height: 40px;
+  padding: 0 60px;
+  font-size: 16px;
+  text-transform: uppercase;
+  outline: none;
+  @include sans-serif-font("Noto Sans CJK JP Medium");
+}
+
+label {
+  @include sans-serif-font("Noto Sans CJK JP Thin");
+}
+
+h1 {
+  @include sans-serif-font("Noto Sans CJK JP Thin");
+  font-size: 42px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+h2 {
+  @include sans-serif-font("Noto Sans CJK JP Thin");
+  font-size: 28px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

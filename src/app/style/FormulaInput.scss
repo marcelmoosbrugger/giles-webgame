@@ -1,0 +1,50 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.formula-input {
+
+  input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 50px;
+    border-radius: 5px;
+    padding: 0 20px;
+    font-size: 24px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .symbols {
+    display: flex;
+    padding-top: 10px;
+
+    span {
+      display: block;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      background: $mainColor1;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+  }
+
+  &:hover input, input:focus {
+    opacity: 1;
+  }
+}

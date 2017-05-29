@@ -17,7 +17,7 @@ export default class LandingPage extends React.Component {
             <div className="landing-page">
                 <nav>
                     <ul>
-                        <li><Link to="/" >New game</Link></li>
+                        <li><Link to="/syntax" >New game</Link></li>
                         <li><Link to="/about" >About</Link></li>
                     </ul>
                 </nav>
