@@ -1,5 +1,5 @@
 /*
- * This file is part of Gile's Webgame.
+ * This file is part of Giles's Webgame.
  *
  * (c) Marcel Moosbrugger
  *
@@ -15,8 +15,11 @@ export default class SyntaxPage extends React.Component {
     render() {
         return (
             <div className="syntax-page">
-                <FormulaInput/>
-                <button>Next</button>
+                <div>
+                    <FormulaInput/>
+                    <button>Next</button>
+                    <div className="background"/>
+                </div>
             </div>
         );
     }

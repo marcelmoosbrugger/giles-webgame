@@ -1,5 +1,5 @@
 /*
- * This file is part of Gile's Webgame.
+ * This file is part of Giles's Webgame.
  *
  * (c) Marcel Moosbrugger
  *

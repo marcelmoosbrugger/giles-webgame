@@ -1,4 +1,4 @@
-# [WIP] Webgame for Gile's Game
+# [WIP] Webgame for Giles's Game
 
 ## Prerequisites
 Install node and npm and assign the following aliases:

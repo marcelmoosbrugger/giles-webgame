@@ -1,5 +1,5 @@
 /*
- * This file is part of Gile's Webgame.
+ * This file is part of Giles's Webgame.
  *
  * (c) Marcel Moosbrugger
  *
@@ -19,7 +19,7 @@ export default class Header extends React.Component {
                     <span className="icon">&forall;</span>
                     <span className="fa-heart icon"/>
                     <span className="icon">&exist;</span>
-                    <span className="text">Gile's Game</span>
+                    <span className="text">Giles's Game</span>
                 </Link>
                 <div className="author">Made with love by <a target="_blank" href="https://github.com/mmsbrggr">@mmsbrggr</a></div>
             </div>
