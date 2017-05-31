@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import '../../style/AboutPage.scss';
+import 'Styles/AboutPage.scss';
 
 export default class AboutPage extends React.Component {
     render() {

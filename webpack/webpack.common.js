@@ -10,7 +10,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const BUILD_DIR = path.resolve('dist');
+const DIST_DIR = path.resolve('dist');
+const BUILD_DIR = path.resolve('build');
 const APP_DIR = path.resolve('src/app');
 const SRC_DIR = path.resolve('src');
 
@@ -24,11 +25,12 @@ module.exports = {
     entry: {
         app: [
             'react-hot-loader/patch',
+            'webpack/hot/only-dev-server',
             APP_DIR + '/index.jsx'
         ]
     },
     output: {
-        path: BUILD_DIR,
+        path: DIST_DIR,
         filename: 'index_bundle.js'
     },
     module: {
@@ -44,6 +46,12 @@ module.exports = {
                 loader: 'file-loader?name=fonts/[name].[ext]'
             }
         ]
+    },
+    resolve: {
+        alias: {
+            Styles: APP_DIR + '/style',
+            Purs: BUILD_DIR + '/purs'
+        }
     },
     plugins: [HtmlWebpackPluginConfig]
 };

@@ -13,7 +13,7 @@ import LandingPage from '../presentationals/LandingPage.jsx';
 import AboutPage from '../presentationals/AboutPage.jsx';
 import SyntaxPage from '../presentationals/SyntaxPage.jsx';
 import Header from "../presentationals/Header.jsx";
-import '../../style/AppContainer.scss';
+import 'Styles/AppContainer.scss';
 
 export default class AppContainer extends React.Component {
     render () {

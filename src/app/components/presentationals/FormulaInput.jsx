@@ -8,13 +8,15 @@
  */
 
 import React from 'react';
-import '../../style/FormulaInput.scss';
+import 'Styles/FormulaInput.scss';
+import Test from 'Purs/Test';
 
 /**
  * A class for inserting a first order formula.
  */
 export default class FormulaInput extends React.Component {
     constructor(props) {
+        console.log(Test);
         super(props);
         this.state = {value: ''};
         this.insertPosition = 0;

@@ -9,7 +9,7 @@
 
 import React from 'react';
 import FormulaInput from './FormulaInput.jsx';
-import '../../style/SyntaxPage.scss';
+import 'Styles/SyntaxPage.scss';
 
 export default class SyntaxPage extends React.Component {
     render() {

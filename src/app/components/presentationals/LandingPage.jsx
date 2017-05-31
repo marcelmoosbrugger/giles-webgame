@@ -9,7 +9,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../style/LandingPage.scss';
+import 'Styles/LandingPage.scss';
 
 export default class LandingPage extends React.Component {
     render() {

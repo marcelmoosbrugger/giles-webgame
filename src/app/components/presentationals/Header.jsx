@@ -9,7 +9,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../style/Header.scss';
+import 'Styles/Header.scss';
 
 export default class Header extends React.Component {
     render () {
