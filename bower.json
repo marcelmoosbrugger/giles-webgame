@@ -1,0 +1,24 @@
+{
+  "name": "giles-webgame",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Marcel Moosbrugger <marcelmoosbrugger@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/marcelmoosbrugger/giles-webgame",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "devDependencies": {
+    "purescript-arrays": "^4.1.0",
+    "purescript-parsing": "^4.2.1",
+    "purescript-prelude": "^3.0.0",
+    "purescript-psci-support": "^3.0.0",
+    "purescript-tuples": "^4.1.0",
+    "purescript-either": "^3.0.0"
+  }
+}

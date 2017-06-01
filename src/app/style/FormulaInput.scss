@@ -11,18 +11,22 @@
 
 .formula-input {
 
+  .input-container {
+    position: relative;
+  }
+
   input {
     box-sizing: border-box;
     display: block;
     width: 100%;
-    border: none;
+    border: 2px solid transparent;
     outline: none;
     height: 50px;
     border-radius: 5px;
     padding: 0 20px;
     font-size: 24px;
     opacity: 0.6;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, border-color 0.2s;
   }
 
   .symbols {
@@ -54,5 +58,40 @@
 
   dl {
     margin-top: 20px;
+  }
+
+  .mistake {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.2s;
+    dd span {
+      display: inline-block;
+      color: $highlightColor;
+      border-bottom: 1px dashed $highlightColor;
+      @include sans-serif-font("Noto Sans CJK JP Regular");
+    }
+  }
+
+  &.error {
+    input {
+      border-color: $highlightColor;
+    }
+
+    .mistake {
+      height: 18px;
+    }
+  }
+
+  &.success .input-container {
+    &::after {
+      @extend .fa;
+      display: block;
+      content: "\f00c";
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: $mainColor1;
+      font-size: 30px;
+    }
   }
 }

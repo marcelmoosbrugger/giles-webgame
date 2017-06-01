@@ -11,7 +11,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const DIST_DIR = path.resolve('dist');
-const BUILD_DIR = path.resolve('build');
 const APP_DIR = path.resolve('src/app');
 const SRC_DIR = path.resolve('src');
 
@@ -44,13 +43,23 @@ module.exports = {
                 test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
                 include: SRC_DIR,
                 loader: 'file-loader?name=fonts/[name].[ext]'
+            },
+            {
+                test: /\.purs$/,
+                loader: 'purs-loader',
+                exclude: /node_modules/,
+                query: {
+                    psc: 'psa',
+                    src: ['bower_components/purescript-*/src/**/*.purs', SRC_DIR + '/**/*.purs'],
+                    warnings: false
+                }
             }
         ]
     },
     resolve: {
         alias: {
             Styles: APP_DIR + '/style',
-            Purs: BUILD_DIR + '/purs'
+            Purs: APP_DIR + '/purs'
         }
     },
     plugins: [HtmlWebpackPluginConfig]

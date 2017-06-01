@@ -4,23 +4,16 @@
   "description": "",
   "main": "index.js",
   "repository": "https://github.com/mmsbrggr/giles-webgame.git",
-  "watch": {
-    "compile:purs": {
-      "patterns": "src",
-      "extensions": "purs"
-    }
-  },
+  "private": true,
   "scripts": {
-    "start": "npm run watch:purs | npm run server",
-    "server": "webpack-dev-server --env=dev --hot --historyApiFallback",
-    "build:dev": "npm run compile:purs && webpack --env=dev --progress --profile --colors",
-    "build:prod": "npm run compile:purs && webpack --env=prod --progress --profile --colors --optimize-minimize --define process.env.NODE_ENV=\"'production'\"",
-    "compile:purs": "./node_modules/.bin/psa -o build/purs src/app/purs/**/*.purs bower_components/**/*.purs",
-    "watch:purs": "./node_modules/.bin/npm-watch compile:purs",
-    "repl:purs": "./node_modules/.bin/purs repl src/app/purs/**/*.purs bower_components/**/*.purs"
+    "start": "webpack-dev-server --env=dev --hot --historyApiFallback",
+    "install:dependencies": "npm i --no-optional && bower install",
+    "build:dev": "webpack --env=dev --progress --profile --colors",
+    "build:prod": "webpack --env=prod --progress --profile --colors --optimize-minimize --define process.env.NODE_ENV=\"'production'\"",
+    "repl:purs": "purs repl 'bower_components/purescript-*/src/**/*.purs' 'src/app/purs/**/*.purs'"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -39,9 +32,7 @@
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
     "node-sass": "^4.5.3",
-    "npm-watch": "^0.1.9",
-    "purescript": "^0.11.4",
-    "purescript-psa": "^0.5.1",
+    "purs-loader": "^3.0.0",
     "react-hot-loader": "^3.0.0-beta.7",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.17.0",

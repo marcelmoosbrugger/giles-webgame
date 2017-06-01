@@ -129,6 +129,5 @@ dist
 ### PureScript ###
 # Dependencies
 .psci_modules
-node_modules
 .psci
-build
+output

@@ -9,25 +9,35 @@
 
 import React from 'react';
 import 'Styles/FormulaInput.scss';
-import Test from 'Purs/Test';
+import Parser from 'Purs/Formula/Parser.purs';
 
 /**
  * A class for inserting a first order formula.
  */
 export default class FormulaInput extends React.Component {
     constructor(props) {
-        console.log(Test);
         super(props);
-        this.state = {value: ''};
-        this.insertPosition = 0;
+        this.state = {value: '', error: undefined, errorAt: 0};
+        this.ignoreNextBlur = false;
     }
 
     handleBlur() {
-        this.insertPosition = this.refs.input.selectionStart;
+        if (this.ignoreNextBlur) return;
+
+        const formula = Parser.parse(this.state.value);
+        this.setState({error: formula.constructor.name === 'Left'});
+        if (formula.constructor.name === 'Left') {
+            this.setState({errorAt: formula.value0.value1.column - 1})
+        }
     }
 
     handleChange(event) {
         this.setState({value: event.target.value});
+    }
+
+    handleFocus() {
+        this.ignoreNextBlur = false;
+        this.setState({error: undefined});
     }
 
     /**
@@ -36,11 +46,13 @@ export default class FormulaInput extends React.Component {
      * @param symbol
      */
     insertSymbol(symbol) {
-        const value = this.state.value.slice(0, this.insertPosition) + symbol + this.state.value.slice(this.insertPosition);
+        this.ignoreNextBlur = true;
+        const insertPosition = this.refs.input.selectionStart;
+        const value = this.state.value.slice(0, insertPosition) + symbol + this.state.value.slice(insertPosition);
         this.setState({value});
-        this.refs.input.focus();
         setTimeout(function () {
-            this.refs.input.setSelectionRange(this.insertPosition + 1, this.insertPosition + 1);
+            this.refs.input.focus();
+            this.refs.input.setSelectionRange(insertPosition + 1, insertPosition + 1);
         }.bind(this), 0)
     }
 
@@ -53,27 +65,36 @@ export default class FormulaInput extends React.Component {
 
     render() {
         return (
-            <div className="formula-input">
+            <div className={'formula-input' + (this.state.error === true ? " error" : (this.state.error === false) ? ' success' : '')}>
                 <label htmlFor="formula-input">Enter formula:</label>
-                <input ref="input"
-                       type="text"
-                       id="formula-input"
-                       value={this.state.value}
-                       onChange={this.handleChange.bind(this)}
-                       onBlur={this.handleBlur.bind(this)}
-                       autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
+                <div className="input-container">
+                    <input ref="input"
+                           type="text"
+                           id="formula-input"
+                           value={this.state.value}
+                           onChange={this.handleChange.bind(this)}
+                           onFocus={this.handleFocus.bind(this)}
+                           onBlur={this.handleBlur.bind(this)}
+                           autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
+                </div>
                 <div className="symbols">
-                    <span onClick={this.insertSymbol.bind(this, '\u2200')}>&forall;</span>
-                    <span onClick={this.insertSymbol.bind(this, '\u2203')}>&exist;</span>
-                    <span onClick={this.insertSymbol.bind(this, '\u2227')}>&and;</span>
-                    <span onClick={this.insertSymbol.bind(this, '\u0026')}>&amp;</span>
-                    <span onClick={this.insertSymbol.bind(this, '\u2228')}>&or;</span>
-                    <span onClick={this.insertSymbol.bind(this, '\u2192')}>&rarr;</span>
-                    <span onClick={this.insertSymbol.bind(this, '\u00AC')}>&not;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u2200')}>&forall;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u2203')}>&exist;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u2227')}>&and;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u0026')}>&amp;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u2228')}>&or;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u2192')}>&rarr;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u00AC')}>&not;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u22A4')}>&#8868;</span>
+                    <span onMouseDown={this.insertSymbol.bind(this, '\u22A5')}>&#8869;</span>
                 </div>
                 <dl>
                     <dt>Conventions:</dt>
-                    <dd>A...Z for predicates/propositions, a...t for constants, u...z for variables</dd>
+                    <dd>A...Z for predicates/propositions, a...t for constants, u...z for variables, strict bracketing</dd>
+                </dl>
+                <dl className="mistake">
+                    <dt>There seems to be a mistake:</dt>
+                    <dd>{this.state.value.substr(0, this.state.errorAt)}<span>{this.state.value.substr(this.state.errorAt)}</span></dd>
                 </dl>
             </div>
         );
