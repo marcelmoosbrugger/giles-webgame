@@ -19,10 +19,11 @@ export default class FormulaInput extends React.Component {
     /**
      * @param props.onError The callback gets called if the user enters a not parsable formula
      * @param props.onSuccess The callback gets called if the user enters a valid formula
+     * @param props.onEdit The callback gets called if the user edits the formula
      */
     constructor(props) {
         super(props);
-        this.state = {value: '', error: undefined, errorAt: 0};
+        this.state = {value: '', error: undefined};
         this.ignoreNextBlur = false;
     }
 
@@ -33,8 +34,7 @@ export default class FormulaInput extends React.Component {
         this.setState({error: formula.constructor.name === 'Left'});
 
         if (formula.constructor.name === 'Left') {
-            this.setState({errorAt: formula.value0.value1.column - 1})
-            this.props.onError(this.state.value);
+            this.props.onError(this.state.value, formula.value0.value1.column - 1);
         } else {
             this.props.onSuccess(formula.value0);
         }
@@ -42,11 +42,22 @@ export default class FormulaInput extends React.Component {
 
     handleChange(event) {
         this.setState({value: event.target.value});
+        this.props.onEdit();
     }
 
     handleFocus() {
         this.ignoreNextBlur = false;
         this.setState({error: undefined});
+    }
+
+    handleKeyDown(event) {
+        if (event.keyCode=== 13) {
+            this.finishEditing();
+        }
+    }
+
+    finishEditing() {
+        this.refs.input.blur();
     }
 
     /**
@@ -63,6 +74,7 @@ export default class FormulaInput extends React.Component {
             this.refs.input.focus();
             this.refs.input.setSelectionRange(insertPosition + 1, insertPosition + 1);
         }.bind(this), 0)
+        this.props.onEdit();
     }
 
     render() {
@@ -77,6 +89,7 @@ export default class FormulaInput extends React.Component {
                            onChange={this.handleChange.bind(this)}
                            onFocus={this.handleFocus.bind(this)}
                            onBlur={this.handleBlur.bind(this)}
+                           onKeyDown={this.handleKeyDown.bind(this)}
                            autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"/>
                 </div>
                 <div className="symbols">
@@ -93,10 +106,6 @@ export default class FormulaInput extends React.Component {
                 <dl>
                     <dt>Conventions:</dt>
                     <dd>A...Z for predicates/propositions, a...t for constants, u...z for variables, strict bracketing</dd>
-                </dl>
-                <dl className="mistake">
-                    <dt>There seems to be a mistake:</dt>
-                    <dd>{this.state.value.substr(0, this.state.errorAt)}<span>{this.state.value.substr(this.state.errorAt)}</span></dd>
                 </dl>
             </div>
         );

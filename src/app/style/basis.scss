@@ -52,6 +52,12 @@ button {
   text-transform: uppercase;
   outline: none;
   @include sans-serif-font("Noto Sans CJK JP Medium");
+  transition: background 0.2s;
+
+  &.disabled {
+    cursor: default;
+    background: $neutralColor4;
+  }
 }
 
 label {

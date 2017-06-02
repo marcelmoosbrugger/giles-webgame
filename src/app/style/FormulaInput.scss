@@ -60,25 +60,9 @@
     margin-top: 20px;
   }
 
-  .mistake {
-    height: 0;
-    overflow: hidden;
-    transition: height 0.2s;
-    dd span {
-      display: inline-block;
-      color: $highlightColor;
-      border-bottom: 1px dashed $highlightColor;
-      @include sans-serif-font("Noto Sans CJK JP Regular");
-    }
-  }
-
   &.error {
     input {
       border-color: $highlightColor;
-    }
-
-    .mistake {
-      height: 18px;
     }
   }
 
