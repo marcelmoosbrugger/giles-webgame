@@ -18,6 +18,7 @@ import Data.Foldable (length)
 -- | Type aliases for better readability
 type Name = String
 type Variable = String
+type Constant = String
 type Arguments = Array String
 type Arity = Int
 

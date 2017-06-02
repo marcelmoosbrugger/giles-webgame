@@ -15,6 +15,11 @@ import Parser from 'Purs/Formula/Parser.purs';
  * A class for inserting a first order formula.
  */
 export default class FormulaInput extends React.Component {
+
+    /**
+     * @param props.onError The callback gets called if the user enters a not parsable formula
+     * @param props.onSuccess The callback gets called if the user enters a valid formula
+     */
     constructor(props) {
         super(props);
         this.state = {value: '', error: undefined, errorAt: 0};
@@ -26,8 +31,12 @@ export default class FormulaInput extends React.Component {
 
         const formula = Parser.parse(this.state.value);
         this.setState({error: formula.constructor.name === 'Left'});
+
         if (formula.constructor.name === 'Left') {
             this.setState({errorAt: formula.value0.value1.column - 1})
+            this.props.onError(this.state.value);
+        } else {
+            this.props.onSuccess(formula.value0);
         }
     }
 
@@ -54,13 +63,6 @@ export default class FormulaInput extends React.Component {
             this.refs.input.focus();
             this.refs.input.setSelectionRange(insertPosition + 1, insertPosition + 1);
         }.bind(this), 0)
-    }
-
-    /**
-     * @returns {string} The formula of of the input
-     */
-    getFormula() {
-        return this.state.value;
     }
 
     render() {

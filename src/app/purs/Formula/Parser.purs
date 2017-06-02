@@ -7,12 +7,12 @@ This source file is subject to the MIT license that is bundled
 with this source code in the file LICENSE.
 -}
 
-module Formula.Parser (parse) where
+module Formula.Parser where
 
 import Prelude
 import Formula
 import Control.Alt ((<|>))
-import Data.Either (Either)
+import Data.Either (Either, isRight)
 import Data.Array (fromFoldable, many)
 import Data.String (singleton)
 import Data.Foldable (fold)
@@ -102,3 +102,7 @@ bottom = char '\8869' >>= \_ -> pure Bot
 variable =      primed \_ -> oneOf variables
 constant =      primed \_ -> oneOf constantSymbols
 predicateName = primed \_ -> oneOf predicateSymbols
+
+-- | Test a given string if it can be parsed by a given parser
+is :: forall a . String -> Parser String a -> Boolean
+is string parser = isRight (runParser string parser)
