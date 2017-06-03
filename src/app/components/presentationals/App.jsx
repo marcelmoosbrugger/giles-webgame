@@ -11,6 +11,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import LandingPage from 'Presentationals/LandingPage.jsx';
 import AboutPage from 'Presentationals/AboutPage.jsx';
+import ModelPage from 'Presentationals/ModelPage.jsx';
 import SetFormulaPage from 'Containers/SetFormulaPage.jsx';
 import Header from "Presentationals/Header.jsx";
 import 'Styles/App.scss';
@@ -24,6 +25,7 @@ export default class App extends React.Component {
                     <Route exact path="/" component={LandingPage} />
                     <Route path="/about" component={AboutPage} />
                     <Route path="/formula" component={SetFormulaPage} />
+                    <Route path="/model" component={ModelPage} />
                 </Switch>
             </div>
         );

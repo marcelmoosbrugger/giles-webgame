@@ -69,6 +69,7 @@ export default class FormulaPage extends React.Component {
         if (!this.state.parsedFormula) return;
 
         this.props.onSuccess(this.state.parsedFormula);
+        this.props.history.push('/model');
     }
 
     /**
