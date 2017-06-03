@@ -16,6 +16,9 @@ import 'Styles/FormulaPage.scss';
  */
 export default class FormulaPage extends React.Component {
 
+    /**
+     * @param props.onSuccess Gets called with the parsed formula when the user clicks "next"
+     */
     constructor(props) {
         super(props);
         this.state = {parsedFormula: null, error: null};
@@ -60,6 +63,15 @@ export default class FormulaPage extends React.Component {
     }
 
     /**
+     * Handles the click on the button
+     */
+    handleButtonClick() {
+        if (!this.state.parsedFormula) return;
+
+        this.props.onSuccess(this.state.parsedFormula);
+    }
+
+    /**
      * Renders the dom element giving the user information about mistakes in the entered formula.
      * @param error The error object
      * @returns
@@ -97,6 +109,7 @@ export default class FormulaPage extends React.Component {
                     <div className="next-row">
                         <button
                             className={(!success) ? 'disabled' : ''}
+                            onClick={this.handleButtonClick.bind(this)}
                             onMouseEnter={this.handleButtonMouseEnter.bind(this)}>Next</button>
                         {error? this.renderMistakeInfo(this.state.error) : ''}
                     </div>

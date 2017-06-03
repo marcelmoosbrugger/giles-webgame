@@ -11,13 +11,16 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider as ReduxContainer} from 'react-redux';
 import { createStore } from 'redux';
-import mainReducer from './state/reducers';
+import reducer from './state/reducers';
 import { AppContainer as HotLoaderContainer} from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
-import AppContainer from './components/containers/AppContainer.jsx';
+import App from './components/presentationals/App.jsx';
 
 // Create the redux state store
-let store = createStore(mainReducer);
+let store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 // Renders the actual application wrapped in all necessary containers
 const renderApp = () => {
@@ -25,7 +28,7 @@ const renderApp = () => {
         <HotLoaderContainer>
             <ReduxContainer store={store}>
                 <BrowserRouter>
-                    <AppContainer/>
+                    <App/>
                 </BrowserRouter>
             </ReduxContainer>
         </HotLoaderContainer>,

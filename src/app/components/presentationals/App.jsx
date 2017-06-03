@@ -9,13 +9,13 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import LandingPage from '../presentationals/LandingPage.jsx';
-import AboutPage from '../presentationals/AboutPage.jsx';
-import FormulaPage from '../presentationals/FormulaPage.jsx';
-import Header from "../presentationals/Header.jsx";
-import 'Styles/AppContainer.scss';
+import LandingPage from 'Presentationals/LandingPage.jsx';
+import AboutPage from 'Presentationals/AboutPage.jsx';
+import SetFormulaPage from 'Containers/SetFormulaPage.jsx';
+import Header from "Presentationals/Header.jsx";
+import 'Styles/App.scss';
 
-export default class AppContainer extends React.Component {
+export default class App extends React.Component {
     render () {
         return (
             <div className="app">
@@ -23,7 +23,7 @@ export default class AppContainer extends React.Component {
                 <Switch>
                     <Route exact path="/" component={LandingPage} />
                     <Route path="/about" component={AboutPage} />
-                    <Route path="/formula" component={FormulaPage} />
+                    <Route path="/formula" component={SetFormulaPage} />
                 </Switch>
             </div>
         );

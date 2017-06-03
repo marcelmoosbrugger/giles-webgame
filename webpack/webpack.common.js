@@ -58,8 +58,11 @@ module.exports = {
     },
     resolve: {
         alias: {
+            Containers: APP_DIR + '/components/containers',
+            Presentationals: APP_DIR + '/components/presentationals',
             Styles: APP_DIR + '/style',
-            Purs: APP_DIR + '/purs'
+            Purs: APP_DIR + '/purs',
+            Actions: APP_DIR + '/state/actions'
         }
     },
     plugins: [HtmlWebpackPluginConfig]
