@@ -8,7 +8,7 @@
  */
 
 import { combineReducers } from 'redux';
-import { SET_FORMULA } from 'Actions';
+import { SET_FORMULA, EMPTY_DATA } from 'Actions';
 
 /**
  * Reducer for the "data" sub state
@@ -23,6 +23,8 @@ const data = (state = {}, action) => {
             return Object.assign({}, state, {
                 formula: action.formula
             });
+        case EMPTY_DATA:
+            return {};
         default:
             return state;
     }

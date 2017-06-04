@@ -1,0 +1,81 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.domain-creator {
+
+  padding: 10px;
+  border: 4px solid darken($baseColor, 4%);
+  border-radius: 5px;
+
+  label {
+    @include sans-serif-font("Noto Sans CJK JP Bold");
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .new {
+    display: flex;
+  }
+
+  ul {
+    margin-bottom: 10px;
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: color 0.2s;
+    border-bottom: 1px solid darken($baseColor, 5%);
+
+    span {
+      display: inline-block;
+      margin-right: 0;
+      width: 0;
+      overflow: hidden;
+      transition: width 0.2s, margin 0.2s;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    &:hover {
+      &, & > * {
+        color: $highlightColor;
+      }
+
+      span {
+        width: 15px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  input {
+    flex-grow: 1;
+    width: 1px;
+    display: block;
+    border: none;
+    height: 30px;
+    outline: none;
+    padding: 0 5px;
+    border-radius: 3px 0 0 3px;
+    font-size: 16px;
+  }
+
+  button {
+    display: block;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

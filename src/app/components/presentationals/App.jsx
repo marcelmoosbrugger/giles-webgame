@@ -9,10 +9,10 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import LandingPage from 'Presentationals/LandingPage.jsx';
+import LandingPage from 'Containers/LandingPage.jsx';
 import AboutPage from 'Presentationals/AboutPage.jsx';
+import FormulaPage from 'Presentationals/FormulaPage.jsx';
 import ModelPage from 'Presentationals/ModelPage.jsx';
-import SetFormulaPage from 'Containers/SetFormulaPage.jsx';
 import Header from "Presentationals/Header.jsx";
 import 'Styles/App.scss';
 
@@ -24,7 +24,7 @@ export default class App extends React.Component {
                 <Switch>
                     <Route exact path="/" component={LandingPage} />
                     <Route path="/about" component={AboutPage} />
-                    <Route path="/formula" component={SetFormulaPage} />
+                    <Route path="/formula" component={FormulaPage} />
                     <Route path="/model" component={ModelPage} />
                 </Switch>
             </div>

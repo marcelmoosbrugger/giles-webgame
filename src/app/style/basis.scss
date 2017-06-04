@@ -58,6 +58,12 @@ button {
     cursor: default;
     background: $neutralColor4;
   }
+
+  &.small {
+    line-height: 30px;
+    padding: 0 30px;
+    height: 30px;
+  }
 }
 
 label {

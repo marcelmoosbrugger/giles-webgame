@@ -10,7 +10,9 @@
 @import "definitions";
 
 .formula-page {
-  padding: 20px 220px 0 220px;
+  padding: 40px 60px;
+  max-width: 1000px;
+  margin: 0 auto;
 
   label {
     display: block;

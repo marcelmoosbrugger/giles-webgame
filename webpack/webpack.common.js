@@ -8,6 +8,7 @@
  */
 
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const DIST_DIR = path.resolve('dist');
@@ -24,7 +25,6 @@ module.exports = {
     entry: {
         app: [
             'react-hot-loader/patch',
-            'webpack/hot/only-dev-server',
             APP_DIR + '/index.jsx'
         ]
     },
@@ -65,5 +65,5 @@ module.exports = {
             Actions: APP_DIR + '/state/actions'
         }
     },
-    plugins: [HtmlWebpackPluginConfig]
+    plugins: [HtmlWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()]
 };

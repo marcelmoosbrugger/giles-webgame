@@ -8,13 +8,14 @@
  */
 
 import React from 'react';
-import 'Styles/FormulaInput.scss';
+import 'Styles/FormulaCreator.scss';
 import Parser from 'Purs/Formula/Parser.purs';
+import Formula from 'Purs/Formula.purs';
 
 /**
  * A class for inserting a first order formula.
  */
-export default class FormulaInput extends React.Component {
+export default class FormulaCreator extends React.Component {
 
     /**
      * @param props.onError The callback gets called if the user enters a not parsable formula
@@ -24,6 +25,9 @@ export default class FormulaInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: '', error: undefined};
+        if (!!props.formula) {
+            this.state = {value: Formula.toString(props.formula), error: false};
+        }
         this.ignoreNextBlur = false;
     }
 
@@ -73,13 +77,13 @@ export default class FormulaInput extends React.Component {
         setTimeout(function () {
             this.refs.input.focus();
             this.refs.input.setSelectionRange(insertPosition + 1, insertPosition + 1);
-        }.bind(this), 0)
+        }.bind(this), 0);
         this.props.onEdit();
     }
 
     render() {
         return (
-            <div className={'formula-input' + (this.state.error === true ? " error" : (this.state.error === false) ? ' success' : '')}>
+            <div className={'formula-creator' + (this.state.error === true ? " error" : (this.state.error === false) ? ' success' : '')}>
                 <label htmlFor="formula-input">Enter formula:</label>
                 <div className="input-container">
                     <input ref="input"

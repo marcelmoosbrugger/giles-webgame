@@ -10,10 +10,14 @@
 /** Action types **/
 
 export const SET_FORMULA = 'SET_FORMULA';
-
+export const EMPTY_DATA = 'EMPTY_DATA';
 
 /** Actions **/
 
 export const setFormula = (formula) => {
     return { type: SET_FORMULA, formula }
+};
+
+export const emptyData = () => {
+    return { type: EMPTY_DATA };
 };

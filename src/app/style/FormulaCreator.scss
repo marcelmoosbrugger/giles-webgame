@@ -9,7 +9,7 @@
 
 @import "definitions";
 
-.formula-input {
+.formula-creator {
 
   .input-container {
     position: relative;
@@ -45,6 +45,11 @@
       margin-right: 10px;
       border-radius: 3px;
       font-size: 16px;
+      transition: background 0.2s;
+    }
+
+    span:hover {
+      background: $mainColor2;
     }
   }
 
@@ -74,7 +79,7 @@
       position: absolute;
       right: 10px;
       top: 10px;
-      color: $mainColor1;
+      color: $mainColor2;
       font-size: 30px;
     }
   }

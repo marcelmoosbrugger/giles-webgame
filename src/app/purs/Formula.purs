@@ -13,6 +13,8 @@ import Prelude
 import Data.Tuple
 import Data.Maybe
 import Data.Array
+import Data.Show
+import Data.String (joinWith)
 import Data.Foldable (length)
 
 -- | Type aliases for better readability
@@ -32,6 +34,17 @@ data Formula = Top | Bot
              | Bin Connective Formula Formula
              | Quant Quantor Variable Formula
 
+instance showConnective :: Show Connective where
+    show Wand = "\8743"
+    show Sand = "\0038"
+    show Or   = "\8744"
+    show Imp  = "\8594"
+
+instance showQuantor :: Show Quantor where
+    show Forall = "\8704"
+    show Exists = "\8707"
+
+
 -- | Returns true iff a formula contains the same predicate symbol with different arities
 hasDuplicatedPredicates :: Formula -> Boolean
 hasDuplicatedPredicates f = fst (hdp (Tuple false []) f)
@@ -49,3 +62,13 @@ hasDuplicatedPredicates f = fst (hdp (Tuple false []) f)
                     Pred name args -> case lookup name ds of
                                         Nothing    -> Tuple b ((Tuple name (length args)) : ds)
                                         Just arity -> Tuple (arity /= length args) ds
+
+-- | Returns the string representation of a formula. This is not realized with the Show
+-- | class because its easier accessible from JS with an own function
+toString :: Formula -> String
+toString Top = "\8868"
+toString Bot = "\8869"
+toString (Pred name arguments) = name <> "(" <> (joinWith "," arguments) <> ")"
+toString (Not formula) = "\0172" <> (toString formula)
+toString (Bin con f1 f2) = "(" <> (toString f1) <> (show con) <> (toString f2) <> ")"
+toString (Quant q v f) = (show q) <> v <> (toString f)

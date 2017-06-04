@@ -12,12 +12,17 @@ import { Link } from 'react-router-dom';
 import 'Styles/LandingPage.scss';
 
 export default class LandingPage extends React.Component {
+
+    handleNewGameClick() {
+        this.props.beforeNewGame();
+    }
+
     render() {
         return (
             <div className="landing-page">
                 <nav>
                     <ul>
-                        <li><Link to="/formula" >New game</Link></li>
+                        <li><Link onClick={this.handleNewGameClick.bind(this)} to="/formula" >New game</Link></li>
                         <li><Link to="/about" >About</Link></li>
                     </ul>
                 </nav>

@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import FormulaInput from './FormulaInput.jsx';
+import FormulaModifier from 'Containers/FormulaModifier.jsx';
 import 'Styles/FormulaPage.scss';
 
 /**
@@ -21,8 +21,7 @@ export default class FormulaPage extends React.Component {
      */
     constructor(props) {
         super(props);
-        this.state = {parsedFormula: null, error: null};
-        this.ignoreNextBlur = false;
+        this.state = {error: null, success: false};
     }
 
     /**
@@ -32,7 +31,6 @@ export default class FormulaPage extends React.Component {
      */
     handleError(formula, errorAt) {
         this.setState({
-            parsedFormula: null,
             error: {
                 formula: formula,
                 at: errorAt
@@ -42,33 +40,31 @@ export default class FormulaPage extends React.Component {
 
     /**
      * Handles a valid formula entered by the user.
-     * @param parsedFormula - The already parsed formula
      */
-    handleSuccess(parsedFormula) {
-        this.setState({parsedFormula: parsedFormula, error: null});
+    handleSuccess() {
+        this.setState({error: null, success: true});
     }
 
     /**
      * Handles the edit event.
      */
     handleEdit() {
-        this.setState({parsedFormula: null, error: null});
+        this.setState({error: null, success: false});
     }
 
     /**
      * When the user hovers the next-button, the editing gets finished.
      */
     handleButtonMouseEnter() {
-        this.refs.formulaInput.finishEditing();
+        this.formulaModifier.getWrappedInstance().finishEditing();
     }
 
     /**
      * Handles the click on the button
      */
     handleButtonClick() {
-        if (!this.state.parsedFormula) return;
+        if (!!this.state.error) return;
 
-        this.props.onSuccess(this.state.parsedFormula);
         this.props.history.push('/model');
     }
 
@@ -96,20 +92,20 @@ export default class FormulaPage extends React.Component {
 
     render() {
         const error = !!this.state.error;
-        const success = !!this.state.parsedFormula;
 
         return (
             <div className={'formula-page' + (error ? ' error' : '')}>
                 <div>
-                    <FormulaInput
-                        ref="formulaInput"
+                    <FormulaModifier
+                        ref={r => { this.formulaModifier = r }}
+                        formula={this.props.formula}
                         onError={this.handleError.bind(this)}
                         onSuccess={this.handleSuccess.bind(this)}
                         onEdit={this.handleEdit.bind(this)}
                     />
                     <div className="next-row">
                         <button
-                            className={(!success) ? 'disabled' : ''}
+                            className={!this.state.success ? 'disabled' : ''}
                             onClick={this.handleButtonClick.bind(this)}
                             onMouseEnter={this.handleButtonMouseEnter.bind(this)}>Next</button>
                         {error? this.renderMistakeInfo(this.state.error) : ''}
