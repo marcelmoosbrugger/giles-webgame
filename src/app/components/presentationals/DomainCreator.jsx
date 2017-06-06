@@ -41,28 +41,29 @@ export default class DomainCreator extends React.Component {
 
     render() {
         return (
-            <div className="domain-creator">
+            <div className="domain-creator box">
                 <label htmlFor="domain-input">Domain</label>
-                <div className="wrapper">
-                    <ul>
-                        {this.props.domain.map((element, i) => {
-                            return (
-                                <li key={i}
-                                    onClick={this.props.removeElement.bind(this, element)}>
-                                    <span className="fa-trash-o" />{element}
-                                </li>
-                            );
-                        })}
-                    </ul>
-                    <div className="new">
-                        <input onChange={this.handleInputChange.bind(this)}
-                               onKeyDown={this.handleInputKeyDown.bind(this)}
-                               ref="input"
-                               id="domain-input"
-                               type="text"/>
-                        <button className={'small' + (!this.state.inputValid ? ' disabled' : '')}
-                                onClick={this.addElementFromInput.bind(this)}>Add</button>
-                    </div>
+                <ul>
+                    {this.props.domain.map((element, i) => {
+                        let deletable = this.props.unremovables.indexOf(element) < 0;
+                        return (
+                            <li key={i}
+                                className={ deletable ? 'deletable' : ''}
+                                onClick={ deletable ? this.props.removeElement.bind(this, element) : null}
+                            >
+                                <span className="fa-trash-o"/>{element}
+                            </li>
+                        );
+                    })}
+                </ul>
+                <div className="new">
+                    <input onChange={this.handleInputChange.bind(this)}
+                           onKeyDown={this.handleInputKeyDown.bind(this)}
+                           ref="input"
+                           id="domain-input"
+                           type="text"/>
+                    <button className={'small' + (!this.state.inputValid ? ' disabled' : '')}
+                            onClick={this.addElementFromInput.bind(this)}>Add</button>
                 </div>
             </div>
         );

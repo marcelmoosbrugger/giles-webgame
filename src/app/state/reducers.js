@@ -8,10 +8,11 @@
  */
 
 import { combineReducers } from 'redux';
-import { SET_FORMULA, EMPTY_DATA, ADD_DOMAIN_ELEMENT, REMOVE_DOMAIN_ELEMENT } from 'Actions';
+import { SET_FORMULA, EMPTY_DATA, SET_DOMAIN, ADD_DOMAIN_ELEMENT,
+         REMOVE_DOMAIN_ELEMENT, SET_VARIABLE_ASSIGNMENT } from 'Actions';
 import Model from 'Purs/Model.purs';
 
-const initialData = { formula: {}, model: Model.emptyModel };
+const initialData = { formula: '', model: Model.emptyModel };
 
 /**
  * Reducer for the "data" sub state
@@ -20,30 +21,30 @@ const initialData = { formula: {}, model: Model.emptyModel };
  * @returns {Object} The new state
  */
 const data = (state = initialData, action) => {
-    let domain;
+    let newState = {};
 
     switch (action.type) {
-
         case SET_FORMULA:
-            return Object.assign({}, state, {
-                formula: action.formula
-            });
+            newState.formula = action.formula;
+            break;
+        case SET_DOMAIN:
+            newState.model = Model.setDomain(action.domain)(state.model);
+            break;
         case ADD_DOMAIN_ELEMENT:
-            domain = state.model.value0.domain.concat([action.element]);
-            return Object.assign({}, state, {
-                model: Model.setDomain(domain)(state.model)
-            });
+            newState.model = Model.addElement(action.element)(state.model);
+            break;
         case REMOVE_DOMAIN_ELEMENT:
-            domain = state.model.value0.domain.slice(0);
-            domain.splice(domain.indexOf(action.element), 1);
-            return Object.assign({}, state, {
-                model: Model.setDomain(domain)(state.model)
-            });
+            newState.model = Model.removeElement(action.element)(state.model);
+            break;
+        case SET_VARIABLE_ASSIGNMENT:
+            newState.model = Model.setVariableAssignment(action.assignment)(state.model);
+            break;
         case EMPTY_DATA:
-            return initialData;
-        default:
-            return state;
+            newState = initialData;
+            break;
     }
+
+    return Object.assign({}, state, newState);
 };
 
 /**

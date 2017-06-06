@@ -12,7 +12,7 @@ import { Switch, Route } from 'react-router-dom';
 import LandingPage from 'Containers/LandingPage.jsx';
 import AboutPage from 'Presentationals/AboutPage.jsx';
 import FormulaPage from 'Presentationals/FormulaPage.jsx';
-import ModelPage from 'Presentationals/ModelPage.jsx';
+import ModelPage from 'Containers/ModelPage.jsx';
 import Header from "Presentationals/Header.jsx";
 import 'Styles/App.scss';
 

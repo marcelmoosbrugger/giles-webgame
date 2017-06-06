@@ -9,7 +9,7 @@
 
 import { connect } from 'react-redux';
 import FormulaCreator from 'Presentationals/FormulaCreator.jsx';
-import { setFormula } from 'Actions';
+import { setFormula, setDomain } from 'Actions';
 
 /** Maps the redux state to props which will get passed to the FormulaCreator **/
 const mapStateToProps = (state) => {
@@ -21,8 +21,9 @@ const mapStateToProps = (state) => {
 /** Maps the redux dispatch function to props which will get passed to the FormulaCreator **/
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onSuccess: (formula) => {
+        onSuccess: (formula, constants) => {
             dispatch(setFormula(formula));
+            dispatch(setDomain(constants));
             ownProps.onSuccess(formula);
         }
     }

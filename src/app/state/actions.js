@@ -11,8 +11,10 @@
 
 export const SET_FORMULA = 'SET_FORMULA';
 export const EMPTY_DATA = 'EMPTY_DATA';
+export const SET_DOMAIN = 'SET_DOMAIN';
 export const ADD_DOMAIN_ELEMENT = 'ADD_DOMAIN_ELEMENT';
 export const REMOVE_DOMAIN_ELEMENT = 'REMOVE_DOMAIN_ELEMENT';
+export const SET_VARIABLE_ASSIGNMENT = 'SET_VARIABLE_ASSIGNMENT';
 
 /** Actions **/
 
@@ -24,10 +26,18 @@ export const emptyData = () => {
     return { type: EMPTY_DATA };
 };
 
+export const setDomain = (domain) => {
+    return { type: SET_DOMAIN, domain };
+};
+
 export const addDomainElement = (element) => {
     return { type: ADD_DOMAIN_ELEMENT, element }
 };
 
 export const removeDomainElement = (element) => {
     return { type: REMOVE_DOMAIN_ELEMENT, element }
+};
+
+export const setVariableAssignment = (assignment) => {
+    return { type: SET_VARIABLE_ASSIGNMENT, assignment }
 };

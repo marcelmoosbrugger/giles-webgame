@@ -10,17 +10,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider as ReduxContainer} from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
+import persistState from 'redux-localstorage';
 import reducer from './state/reducers';
 import { AppContainer as HotLoaderContainer} from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 import App from './components/presentationals/App.jsx';
 
 // Create the redux state store
-let store = createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = composeEnhancers(persistState());
+let store = createStore(reducer, enhancer);
 
 // Renders the actual application wrapped in all necessary containers
 const renderApp = () => {

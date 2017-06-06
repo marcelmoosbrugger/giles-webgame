@@ -9,18 +9,38 @@
 
 import React from 'react';
 import 'Styles/ModelPage.scss';
-import DomainModifier from 'Containers/DomainModifier.jsx';
+import DomainCreator from 'Presentationals/DomainCreator.jsx';
+import VariableAssigner from 'Presentationals/VariableAssigner.jsx';
+import Parser from 'Purs/Formula/Parser.purs';
+import Formula from 'Purs/Formula/Info.purs';
+
 
 /**
  * Allows the user to define a logical model for a formula
  */
 export default class ModelPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.formula = Parser.parse(this.props.formula).value0;
+    }
+
     render() {
         return (
             <div className="model-page">
                 <div className="domain">
-                    <DomainModifier/>
+                    <DomainCreator
+                        unremovables={Formula.constants(this.formula)}
+                        domain={this.props.model.domain}
+                        addElement={this.props.addDomainElement}
+                        removeElement={this.props.removeDomainElement}
+                    />
+                    <VariableAssigner
+                        variables={Formula.freeVariables(this.formula)}
+                        elements={this.props.model.domain}
+                        assignments={this.props.model.variables}
+                        onChange={this.props.setVariableAssignment}
+                    />
                 </div>
                 <div className="background"/>
             </div>

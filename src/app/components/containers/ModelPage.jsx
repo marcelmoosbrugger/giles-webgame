@@ -8,32 +8,36 @@
  */
 
 import { connect } from 'react-redux';
-import DomainCreator from 'Presentationals/DomainCreator.jsx';
-import { addDomainElement, removeDomainElement } from 'Actions';
+import ModelPageP from 'Presentationals/ModelPage.jsx';
+import { addDomainElement, removeDomainElement, setConstantAssignment, setVariableAssignment } from 'Actions';
 
 /** Maps the redux state to props which will get passed down **/
 const mapStateToProps = (state) => {
     return {
-        domain: state.data.model.value0.domain
+        model: state.data.model,
+        formula: state.data.formula
     }
 };
 
 /** Maps the redux dispatch function to props which will get passed to the FormulaCreator **/
 const mapDispatchToProps = (dispatch) => {
     return {
-        addElement: (element) => {
+        addDomainElement: (element) => {
             dispatch(addDomainElement(element));
         },
-        removeElement: (element) => {
+        removeDomainElement: (element) => {
             dispatch(removeDomainElement(element));
         },
+        setVariableAssignment: (variable, element) => {
+            dispatch(setVariableAssignment({variable, element}));
+        }
     }
 };
 
 /** Connects the FormulaCreator with the redux store  **/
-const DomainModifier = connect(
+const ModelPage = connect(
     mapStateToProps,
     mapDispatchToProps
-)(DomainCreator);
+)(ModelPageP);
 
-export default DomainModifier;
+export default ModelPage;

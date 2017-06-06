@@ -11,6 +11,7 @@ import React from 'react';
 import 'Styles/FormulaCreator.scss';
 import Parser from 'Purs/Formula/Parser.purs';
 import Formula from 'Purs/Formula.purs';
+import Info from 'Purs/Formula/Info.purs';
 
 /**
  * A class for inserting a first order formula.
@@ -18,6 +19,7 @@ import Formula from 'Purs/Formula.purs';
 export default class FormulaCreator extends React.Component {
 
     /**
+     * @param props.formula The formula to start with
      * @param props.onError The callback gets called if the user enters a not parsable formula
      * @param props.onSuccess The callback gets called if the user enters a valid formula
      * @param props.onEdit The callback gets called if the user edits the formula
@@ -25,9 +27,7 @@ export default class FormulaCreator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: '', error: undefined};
-        if (Object.keys(props.formula).length > 0) {
-            this.state = {value: Formula.toString(props.formula), error: false};
-        }
+        this.state = {value: props.formula, error: (props.formula.length > 0) ? false : undefined};
         this.ignoreNextBlur = false;
     }
 
@@ -40,7 +40,7 @@ export default class FormulaCreator extends React.Component {
         if (formula.constructor.name === 'Left') {
             this.props.onError(this.state.value, formula.value0.value1.column - 1);
         } else {
-            this.props.onSuccess(formula.value0);
+            this.props.onSuccess(Formula.toString(formula.value0), Info.constants(formula.value0));
         }
     }
 

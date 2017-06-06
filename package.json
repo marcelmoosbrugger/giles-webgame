@@ -7,6 +7,8 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --env=dev --hot --historyApiFallback",
+    "clean": "rm -rf .psci_modules bower_components node_modules output",
+    "reinstall": "npm run clean && npm run install:dependencies",
     "install:dependencies": "npm i --no-optional && bower install",
     "build:dev": "webpack --env=dev --progress --profile --colors",
     "build:prod": "webpack --env=prod --progress --profile --colors --optimize-minimize --define process.env.NODE_ENV=\"'production'\"",
@@ -20,7 +22,8 @@
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-localstorage": "^0.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

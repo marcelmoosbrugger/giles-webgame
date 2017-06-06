@@ -122,3 +122,39 @@ dl {
     right: 15vw;
   }
 }
+
+.box {
+  padding: 10px;
+  border: 4px solid darken($baseColor, 4%);
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+  label {
+    @include sans-serif-font("Noto Sans CJK JP Bold");
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .select {
+    display: block;
+
+    select {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding-right: 25px;
+    }
+
+    &::after {
+      @extend .fa;
+      content: "\f13a";
+      margin-left: -20px;
+      color: $mainColor2;
+      pointer-events: none;
+      cursor: pointer;
+      background: $baseColor;
+    }
+  }
+}

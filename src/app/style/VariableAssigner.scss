@@ -1,0 +1,32 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.variable-assigner {
+  * {
+    font-size: 18px;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    border-bottom: 1px solid darken($baseColor, 5%);
+    margin-bottom: 5px;
+  }
+
+  span {
+    display: block;
+  }
+
+  .select {
+      margin-bottom: 0;
+  }
+}
