@@ -9,7 +9,7 @@
 
 import React from 'react';
 import 'Styles/ModelPage.scss';
-import DomainCreator from 'Presentationals/DomainCreator.jsx';
+import DomainModifier from 'Containers/DomainModifier.jsx';
 
 /**
  * Allows the user to define a logical model for a formula
@@ -20,7 +20,7 @@ export default class ModelPage extends React.Component {
         return (
             <div className="model-page">
                 <div className="domain">
-                    <DomainCreator/>
+                    <DomainModifier/>
                 </div>
                 <div className="background"/>
             </div>

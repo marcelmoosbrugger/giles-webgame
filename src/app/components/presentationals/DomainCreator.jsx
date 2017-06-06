@@ -17,36 +17,20 @@ export default class DomainCreator extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            inputValid: false,
-            elements: []
-        }
-    }
-
-    addElement(element) {
-        this.setState({ elements: this.state.elements.concat([element]) });
-    }
-
-    removeElement(element) {
-        let elements = this.state.elements.slice(0);
-        elements.splice(elements.indexOf(element), 1);
-
-        this.setState({ elements });
+        this.state = { inputValid: false }
     }
 
     addElementFromInput() {
         if (!this.state.inputValid) return;
 
-        this.addElement(this.refs.input.value.trim());
+        this.props.addElement(this.refs.input.value.trim());
         this.refs.input.value = '';
         this.setState({ inputValid: false });
     }
 
     handleInputChange() {
         const input = this.refs.input.value.trim();
-        this.setState({
-            inputValid: input.length > 0 && this.state.elements.indexOf(input) === -1
-        });
+        this.setState({ inputValid: input.length > 0 && this.props.domain.indexOf(input) === -1 });
     }
 
     handleInputKeyDown(event) {
@@ -61,10 +45,10 @@ export default class DomainCreator extends React.Component {
                 <label htmlFor="domain-input">Domain</label>
                 <div className="wrapper">
                     <ul>
-                        {this.state.elements.map((element, i) => {
+                        {this.props.domain.map((element, i) => {
                             return (
                                 <li key={i}
-                                    onClick={this.removeElement.bind(this, element)}>
+                                    onClick={this.props.removeElement.bind(this, element)}>
                                     <span className="fa-trash-o" />{element}
                                 </li>
                             );

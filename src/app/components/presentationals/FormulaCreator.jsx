@@ -25,7 +25,7 @@ export default class FormulaCreator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: '', error: undefined};
-        if (!!props.formula) {
+        if (Object.keys(props.formula).length > 0) {
             this.state = {value: Formula.toString(props.formula), error: false};
         }
         this.ignoreNextBlur = false;
