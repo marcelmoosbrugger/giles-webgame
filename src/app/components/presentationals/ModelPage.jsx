@@ -11,8 +11,10 @@ import React from 'react';
 import 'Styles/ModelPage.scss';
 import DomainCreator from 'Presentationals/DomainCreator.jsx';
 import VariableAssigner from 'Presentationals/VariableAssigner.jsx';
+import PredicateAssigner from 'Presentationals/PredicateAssigner.jsx';
 import Parser from 'Purs/Formula/Parser.purs';
 import Formula from 'Purs/Formula/Info.purs';
+import Model from 'Purs/Model.purs';
 
 
 /**
@@ -41,6 +43,17 @@ export default class ModelPage extends React.Component {
                         assignments={this.props.model.variables}
                         onChange={this.props.setVariableAssignment}
                     />
+                    {Formula.predicates(this.formula).map((predicate, i) => {
+                        return (
+                            <PredicateAssigner
+                                predicate={predicate}
+                                values={Model.getPredicateAssignment(predicate.name)(this.props.model).values}
+                                elements={this.props.model.domain}
+                                onChange={this.props.setPredicateAssignment.bind(this, predicate.name)}
+                            />
+                        )
+                    })}
+
                 </div>
                 <div className="background"/>
             </div>

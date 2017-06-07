@@ -9,7 +9,8 @@
 
 import { connect } from 'react-redux';
 import ModelPageP from 'Presentationals/ModelPage.jsx';
-import { addDomainElement, removeDomainElement, setConstantAssignment, setVariableAssignment } from 'Actions';
+import { addDomainElement, removeDomainElement,
+         setConstantAssignment, setVariableAssignment, setPredicateAssignment } from 'Actions';
 
 /** Maps the redux state to props which will get passed down **/
 const mapStateToProps = (state) => {
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setVariableAssignment: (variable, element) => {
             dispatch(setVariableAssignment({variable, element}));
+        },
+        setPredicateAssignment: (predicate, args, value) => {
+            dispatch(setPredicateAssignment(predicate, {args, value}));
         }
     }
 };

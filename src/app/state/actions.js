@@ -15,6 +15,7 @@ export const SET_DOMAIN = 'SET_DOMAIN';
 export const ADD_DOMAIN_ELEMENT = 'ADD_DOMAIN_ELEMENT';
 export const REMOVE_DOMAIN_ELEMENT = 'REMOVE_DOMAIN_ELEMENT';
 export const SET_VARIABLE_ASSIGNMENT = 'SET_VARIABLE_ASSIGNMENT';
+export const SET_PREDICATE_ASSIGNMENT = 'SET_PREDICATE_ASSIGNMENT';
 
 /** Actions **/
 
@@ -40,4 +41,8 @@ export const removeDomainElement = (element) => {
 
 export const setVariableAssignment = (assignment) => {
     return { type: SET_VARIABLE_ASSIGNMENT, assignment }
+};
+
+export const setPredicateAssignment = (predicate, assignment) => {
+    return { type: SET_PREDICATE_ASSIGNMENT, predicate, assignment }
 };

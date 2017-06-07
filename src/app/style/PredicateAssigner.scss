@@ -1,0 +1,33 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.predicate-assigner {
+  * {
+    font-size: 18px;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darken($baseColor, 5%);
+    margin-bottom: 5px;
+    line-height: 30px;
+  }
+
+  input {
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    width: 70px;
+    text-align: center;
+  }
+}

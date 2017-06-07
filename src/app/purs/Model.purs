@@ -12,12 +12,13 @@ module Model where
 import Prelude
 import Formula
 import Data.Array hiding (deleteBy)
+import Data.Foldable (and, elem)
 import Data.Maybe
 
 type DomainElement = String
 type Domain = Array DomainElement
 type VariableAssignment = { variable :: Variable, element :: DomainElement }
-type PredicateAssignment = { predicate :: Name, values :: (Array { arguments :: Arguments, value :: Number }) }
+type PredicateAssignment = { predicate :: Name, values :: (Array { args :: Arguments, value :: Number }) }
 type Model = { domain     :: Domain
              , variables  :: (Array VariableAssignment)
              , predicates :: (Array PredicateAssignment)
@@ -33,15 +34,32 @@ addElement :: DomainElement -> Model -> Model
 addElement e m = m { domain =  m.domain <> [e] }
 
 removeElement :: DomainElement -> Model -> Model
-removeElement e m = m { domain = newDomain, variables = newVariables }
+removeElement e m = m { domain = newDomain, variables = newVariables, predicates = newPredicates }
     where newDomain    = delete e m.domain
           newVariables = deleteBy containsElement m.variables
+          newPredicates = removeFromPredicateAssignments e m.predicates
           containsElement ass = ass.element == e
 
 setVariableAssignment :: VariableAssignment -> Model -> Model
 setVariableAssignment va m = m { variables = newVariables }
     where newVariables = replaceBy compareVarAss va m.variables
           compareVarAss va1 va2 = va1.variable == va2.variable
+
+setPredicateAssignment :: Name -> { args :: Arguments, value :: Number } -> Model -> Model
+setPredicateAssignment n ass m = m { predicates = replaceBy comparePredAss newAssignment m.predicates }
+    where currentAssignment = getPredicateAssignment n m
+          newAssignment     = currentAssignment { values = newValues }
+          newValues         = replaceBy compareArgs ass currentAssignment.values
+
+getPredicateAssignment :: Name -> Model -> PredicateAssignment
+getPredicateAssignment n m =
+    case head $ filter (\p -> p.predicate == n) m.predicates of
+        Nothing    -> { predicate: n, values: [] }
+        Just (ass) -> ass
+
+removeFromPredicateAssignments :: DomainElement -> (Array PredicateAssignment) -> (Array PredicateAssignment)
+removeFromPredicateAssignments d pas = map (rfpa d) pas
+    where rfpa element assignment = assignment { values = deleteBy (\v -> element `elem` v.args) assignment.values }
 
 -- | Helper function which replaces an element in an array by another element.
 -- | Moreover comparison function can be provided
@@ -60,5 +78,18 @@ deleteBy f array =
     case uncons array of
         Nothing                  -> []
         Just {head: x, tail: xs} -> if f x
-                                    then xs
+                                    then deleteBy f xs
                                     else x : (deleteBy f xs)
+
+-- | Returns an array which contains all possible combinations of domain
+-- | elements for a given arity and given elements.
+getAllArgsCombinations :: Domain -> Arity -> Array (Array DomainElement)
+getAllArgsCombinations _ 0 = [[]]
+getAllArgsCombinations d n = fold $ map (\el -> map (cons el) previous) d
+    where previous = getAllArgsCombinations d (n - 1)
+
+compareArgs :: { args :: Arguments, value :: Number } -> { args :: Arguments, value :: Number } -> Boolean
+compareArgs a1 a2 = (length a1.args == length a2.args) && (and $ zipWith (==) a1.args a2.args)
+
+comparePredAss :: PredicateAssignment -> PredicateAssignment -> Boolean
+comparePredAss p1 p2 = p1.predicate == p2.predicate

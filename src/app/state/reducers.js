@@ -9,7 +9,7 @@
 
 import { combineReducers } from 'redux';
 import { SET_FORMULA, EMPTY_DATA, SET_DOMAIN, ADD_DOMAIN_ELEMENT,
-         REMOVE_DOMAIN_ELEMENT, SET_VARIABLE_ASSIGNMENT } from 'Actions';
+         REMOVE_DOMAIN_ELEMENT, SET_VARIABLE_ASSIGNMENT, SET_PREDICATE_ASSIGNMENT } from 'Actions';
 import Model from 'Purs/Model.purs';
 
 const initialData = { formula: '', model: Model.emptyModel };
@@ -38,6 +38,9 @@ const data = (state = initialData, action) => {
             break;
         case SET_VARIABLE_ASSIGNMENT:
             newState.model = Model.setVariableAssignment(action.assignment)(state.model);
+            break;
+        case SET_PREDICATE_ASSIGNMENT:
+            newState.model = Model.setPredicateAssignment(action.predicate)(action.assignment)(state.model);
             break;
         case EMPTY_DATA:
             newState = initialData;
