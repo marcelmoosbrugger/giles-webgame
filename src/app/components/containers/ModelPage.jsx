@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-/** Maps the redux dispatch function to props which will get passed to the FormulaCreator **/
+/** Maps the redux dispatch function to props which will get passed to the ModelPage **/
 const mapDispatchToProps = (dispatch) => {
     return {
         addDomainElement: (element) => {

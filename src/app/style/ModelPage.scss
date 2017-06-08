@@ -7,10 +7,68 @@
  * with this source code in the file LICENSE.
  */
 
-.model-page {
-  padding: 20px 60px;
+@import "definitions";
 
-  .domain {
-    width: 300px;
+.model-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 80px 60px 40px 60px;
+
+  & > span {
+    display: block;
+    @include sans-serif-font("Noto Sans CJK JP Thin");
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .model {
+    width: 100%;
+    display: grid;
+    display: -ms-grid;
+    grid-template-columns: auto auto auto;
+    -ms-grid-columns: auto auto auto;
+
+    & > * {
+      margin: 0 20px 20px 0;
+    }
+  }
+
+  .next-row {
+    padding-top: 80px;
+
+    span {
+      opacity: 0;
+      transition: opacity 0.2s;
+      padding-left: 10px;
+      @include sans-serif-font("Noto Sans CJK JP Thin");
+    }
+
+    span.visible {
+      opacity: 1;
+    }
+  }
+
+  .no-model {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: -50px;
+  }
+}
+
+@media all and (max-width: 1500px) {
+  .model-page .model {
+    grid-template-columns: auto auto;
+    -ms-grid-columns: auto auto;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  .model-page .model {
+    grid-template-columns: auto;
+    -ms-grid-columns: auto;
   }
 }

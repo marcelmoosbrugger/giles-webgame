@@ -127,7 +127,7 @@ dl {
   padding: 10px;
   border: 4px solid darken($baseColor, 4%);
   border-radius: 5px;
-  margin-bottom: 20px;
+  background: rgba($baseColor, 0.6);
 
   label {
     @include sans-serif-font("Noto Sans CJK JP Bold");

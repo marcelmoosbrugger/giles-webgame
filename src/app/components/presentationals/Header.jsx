@@ -11,6 +11,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'Styles/Header.scss';
 
+/**
+ * Component which represents the header of the application.
+ */
 export default class Header extends React.Component {
     render () {
         return (

@@ -11,6 +11,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'Styles/LandingPage.scss';
 
+/**
+ * Component which represents the landing page of the application.
+ */
 export default class LandingPage extends React.Component {
 
     handleNewGameClick() {

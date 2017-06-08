@@ -11,11 +11,14 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import LandingPage from 'Containers/LandingPage.jsx';
 import AboutPage from 'Presentationals/AboutPage.jsx';
-import FormulaPage from 'Presentationals/FormulaPage.jsx';
+import FormulaPage from 'Containers/FormulaPage.jsx';
 import ModelPage from 'Containers/ModelPage.jsx';
 import Header from "Presentationals/Header.jsx";
 import 'Styles/App.scss';
 
+/**
+ * Renders the complete app. This is the root component
+ */
 export default class App extends React.Component {
     render () {
         return (

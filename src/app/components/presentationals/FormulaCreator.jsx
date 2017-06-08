@@ -14,7 +14,7 @@ import Formula from 'Purs/Formula.purs';
 import Info from 'Purs/Formula/Info.purs';
 
 /**
- * A class for inserting a first order formula.
+ * Component which allows a user to create first-order formula
  */
 export default class FormulaCreator extends React.Component {
 
@@ -28,9 +28,16 @@ export default class FormulaCreator extends React.Component {
         super(props);
         this.state = {value: '', error: undefined};
         this.state = {value: props.formula, error: (props.formula.length > 0) ? false : undefined};
+        // when the user clicks on a symbol, the next blur of the input needs to
+        // be ignored. After the click on the symbol the component focuses right back to the input
         this.ignoreNextBlur = false;
     }
 
+    /**
+     * On blur the string in the input gets evaluated.
+     * The method tries to parse the formula and depending on whether or not that was
+     * successful it calls the corresponding callbacks.
+     */
     handleBlur() {
         if (this.ignoreNextBlur) return;
 
@@ -44,22 +51,38 @@ export default class FormulaCreator extends React.Component {
         }
     }
 
+    /**
+     * Handles the onChange event of the input.
+     *
+     * @param event
+     */
     handleChange(event) {
         this.setState({value: event.target.value});
         this.props.onEdit();
     }
 
+    /**
+     * Handles the onFocus event of the input.
+     */
     handleFocus() {
         this.ignoreNextBlur = false;
         this.setState({error: undefined});
     }
 
+    /**
+     * Finishes the editing of the component when the user hits enter.
+     *
+     * @param event
+     */
     handleKeyDown(event) {
         if (event.keyCode=== 13) {
             this.finishEditing();
         }
     }
 
+    /**
+     * Makes sure the current value of the input is parsed.
+     */
     finishEditing() {
         this.refs.input.blur();
     }
@@ -67,6 +90,7 @@ export default class FormulaCreator extends React.Component {
     /**
      * Inserts a given symbol at the position saved at the last blur.
      * After that the cursor is positioned right after the inserted symbol.
+     *
      * @param symbol
      */
     insertSymbol(symbol) {
@@ -74,10 +98,13 @@ export default class FormulaCreator extends React.Component {
         const insertPosition = this.refs.input.selectionStart;
         const value = this.state.value.slice(0, insertPosition) + symbol + this.state.value.slice(insertPosition);
         this.setState({value});
+
+        // setTimeout 0 positions the callback function at the end of the current execution queue
         setTimeout(function () {
             this.refs.input.focus();
             this.refs.input.setSelectionRange(insertPosition + 1, insertPosition + 1);
         }.bind(this), 0);
+
         this.props.onEdit();
     }
 

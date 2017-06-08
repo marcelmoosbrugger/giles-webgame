@@ -55,3 +55,21 @@ predicates f =
         Bin _ g h      -> (predicates g) `u` (predicates h)
         Quant _ _ g    -> predicates g
     where u = unionBy (\pi1 pi2 -> pi1.name == pi2.name)
+
+-- | Returns true iff the given formula is propositional
+isPropositional :: Formula -> Boolean
+isPropositional Top                = true
+isPropositional Bot                = true
+isPropositional (Quant _ _ _)      = false
+isPropositional (Pred _ arguments) = length arguments == 0
+isPropositional (Not formula)      = isPropositional formula
+isPropositional (Bin _ f1 f2)      = isPropositional f1 && isPropositional f2
+
+needsModel :: Formula -> Boolean
+needsModel Top           = false
+needsModel Bot           = false
+needsModel (Quant _ _ _) = true
+needsModel (Pred _ _)    = true
+needsModel (Not formula) = needsModel formula
+needsModel (Bin _ f1 f2) = needsModel f1 || needsModel f2
+

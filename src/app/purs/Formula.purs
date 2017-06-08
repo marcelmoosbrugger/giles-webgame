@@ -66,9 +66,11 @@ hasDuplicatedPredicates f = fst (hdp (Tuple false []) f)
 -- | Returns the string representation of a formula. This is not realized with the Show
 -- | class because its easier accessible from JS with an own function
 toString :: Formula -> String
-toString Top = "\8868"
-toString Bot = "\8869"
-toString (Pred name arguments) = name <> "(" <> (joinWith "," arguments) <> ")"
-toString (Not formula) = "\0172" <> (toString formula)
-toString (Bin con f1 f2) = "(" <> (toString f1) <> (show con) <> (toString f2) <> ")"
-toString (Quant q v f) = (show q) <> v <> (toString f)
+toString Top                   = "\8868"
+toString Bot                   = "\8869"
+toString (Pred name arguments) = name <> (if length arguments > 0
+                                            then "(" <> (joinWith "," arguments) <> ")"
+                                            else "")
+toString (Not formula)         = "\0172" <> (toString formula)
+toString (Bin con f1 f2)       = "(" <> (toString f1) <> (show con) <> (toString f2) <> ")"
+toString (Quant q v f)         = (show q) <> v <> (toString f)

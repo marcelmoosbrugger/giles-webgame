@@ -62,7 +62,9 @@ module.exports = {
             Presentationals: APP_DIR + '/components/presentationals',
             Styles: APP_DIR + '/style',
             Purs: APP_DIR + '/purs',
-            Actions: APP_DIR + '/state/actions'
+            Actions: APP_DIR + '/state/actions',
+            Validation: APP_DIR + '/validation',
+            Abstracts: APP_DIR + '/components/abstracts'
         }
     },
     plugins: [HtmlWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()]

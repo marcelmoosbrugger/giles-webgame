@@ -10,6 +10,9 @@
 import React from 'react';
 import 'Styles/AboutPage.scss';
 
+/**
+ * The page which provides an explanation of the game
+ */
 export default class AboutPage extends React.Component {
     render() {
         return (

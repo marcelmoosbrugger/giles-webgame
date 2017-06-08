@@ -8,33 +8,31 @@
  */
 
 import { connect } from 'react-redux';
-import FormulaCreator from 'Presentationals/FormulaCreator.jsx';
-import { setFormula, setDomain } from 'Actions';
+import FormulaPageP from 'Presentationals/FormulaPage.jsx';
+import { emptyData, setFormula, setDomain } from 'Actions';
 
-/** Maps the redux state to props which will get passed to the FormulaCreator **/
+/** Maps the redux state to props which will get passed down **/
 const mapStateToProps = (state) => {
     return {
         formula: state.data.formula
     }
 };
 
-/** Maps the redux dispatch function to props which will get passed to the FormulaCreator **/
-const mapDispatchToProps = (dispatch, ownProps) => {
+/** Maps the redux dispatch function to props which will get passed to the FormulaPage **/
+const mapDispatchToProps = (dispatch) => {
     return {
         onSuccess: (formula, constants) => {
+            dispatch(emptyData());
             dispatch(setFormula(formula));
             dispatch(setDomain(constants));
-            ownProps.onSuccess(formula);
         }
     }
 };
 
 /** Connects the FormulaCreator with the redux store  **/
-const FormulaModifier = connect(
+const FormulaPage = connect(
     mapStateToProps,
-    mapDispatchToProps,
-    null,
-    { withRef: true }
-)(FormulaCreator);
+    mapDispatchToProps
+)(FormulaPageP);
 
-export default FormulaModifier;
+export default FormulaPage;
