@@ -1,0 +1,66 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.game-page {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 20px 60px;
+  box-sizing: border-box;
+
+  .tenet {
+    flex-grow: 1;
+  }
+
+  .decision {
+    position: relative;
+    flex-grow: 5;
+    margin: 0 20px;
+  }
+
+  .no-formula {
+    $size: 38px;
+
+    position: absolute;
+    top: 50%;
+    margin-top: -$size/2;
+    width: 100%;
+    display: block;
+    text-align: center;
+    @include sans-serif-font("Noto Sans CJK JP Bold");
+    text-transform: uppercase;
+    font-size: $size;
+    color: $neutralColor4;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  .game-page {
+    flex-direction: column;
+
+    .tenet, .decision {
+      flex-grow: 0;
+    }
+
+    .tenet {
+      margin-bottom: 20px;
+    }
+
+    .decision {
+      order: 3;
+    }
+
+    .no-formula {
+      top: auto;
+      margin: 0;
+    }
+  }
+}

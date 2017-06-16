@@ -17,6 +17,12 @@ export const REMOVE_DOMAIN_ELEMENT = 'REMOVE_DOMAIN_ELEMENT';
 export const SET_VARIABLE_ASSIGNMENT = 'SET_VARIABLE_ASSIGNMENT';
 export const SET_PREDICATE_ASSIGNMENT = 'SET_PREDICATE_ASSIGNMENT';
 
+export const EMPTY_GAME = 'EMPTY_GAME';
+export const ADD_TO_TENET = 'ADD_TO_TENET';
+export const REMOVE_FROM_TENET = 'REMOVE_FROM_TENET';
+export const EMPTY_ACTIVE_FORMULA = 'EMPTY_ACTIVE_FORMULA';
+export const SET_ACTIVE_FORMULA = 'SET_ACTIVE_FORMULA';
+
 /** Actions **/
 
 export const setFormula = (formula) => {
@@ -45,4 +51,24 @@ export const setVariableAssignment = (assignment) => {
 
 export const setPredicateAssignment = (predicate, assignment) => {
     return { type: SET_PREDICATE_ASSIGNMENT, predicate, assignment }
+};
+
+export const emptyGame = () => {
+    return { type: EMPTY_GAME };
+};
+
+export const addToTenet = (player, formula) => {
+    return { type: ADD_TO_TENET, player, formula }
+};
+
+export const removeFromTenet = (player, formula) => {
+    return { type: REMOVE_FROM_TENET, player, formula }
+};
+
+export const emptyActiveFormula = () => {
+    return { type: EMPTY_ACTIVE_FORMULA };
+};
+
+export const setActiveFormula = (fromPlayer, formula) => {
+    return { type: SET_ACTIVE_FORMULA, fromPlayer, formula };
 };

@@ -1,0 +1,57 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.tenet {
+
+  li {
+    font-size: 18px;
+    line-height: 30px;
+    margin-right: 10px;
+    border-bottom: 1px solid darken($baseColor, 5%);
+    display: flex;
+
+    & > * {
+      display: block;
+      line-height: 30px;
+      transition: color 200ms;
+    }
+
+    .icon {
+      overflow: hidden;
+      width: 0;
+      transition: width 200ms, color 200ms;
+    }
+  }
+
+
+  &.selectable {
+    li {
+      border-color: rgba($highlightColor, 0.4);
+    }
+
+    li:hover {
+      cursor: pointer;
+      & > * {
+        color: $mainColor2;
+      }
+
+      .icon {
+        width: 20px;
+      }
+    }
+  }
+
+  .no-formulae {
+    font-size: 16px;
+    font-style: italic;
+    color: $neutralColor3;
+  }
+}

@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-/** Connects the FormulaCreator with the redux store  **/
+/** Connects the FormulaPage with the redux store  **/
 const FormulaPage = connect(
     mapStateToProps,
     mapDispatchToProps

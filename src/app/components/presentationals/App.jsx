@@ -13,6 +13,7 @@ import LandingPage from 'Containers/LandingPage.jsx';
 import AboutPage from 'Presentationals/AboutPage.jsx';
 import FormulaPage from 'Containers/FormulaPage.jsx';
 import ModelPage from 'Containers/ModelPage.jsx';
+import GamePage from 'Containers/GamePage.jsx';
 import Header from "Presentationals/Header.jsx";
 import 'Styles/App.scss';
 
@@ -29,6 +30,7 @@ export default class App extends React.Component {
                     <Route path="/about" component={AboutPage} />
                     <Route path="/formula" component={FormulaPage} />
                     <Route path="/model" component={ModelPage} />
+                    <Route path="/game" component={GamePage} />
                 </Switch>
             </div>
         );

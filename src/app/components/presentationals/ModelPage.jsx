@@ -30,6 +30,7 @@ export default class ModelPage extends React.Component {
      * @param props.removeDomainElement The callback for removing a domain element
      * @param props.setVariableAssignment The callback for setting a variable assignment
      * @param props.setPredicateAssignment The callback for setting a predicate assignment
+     * @param props.beforeStartGame Callback gets called before the game is actually started
      */
     constructor(props) {
         super(props);
@@ -90,6 +91,7 @@ export default class ModelPage extends React.Component {
     handleButtonClick() {
         if (!this.state.valid) return;
 
+        this.props.beforeStartGame(this.props.formula);
         this.props.history.push('/game');
     }
 
