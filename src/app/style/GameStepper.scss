@@ -1,0 +1,65 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.game-stepper {
+
+  .description {
+    display: block;
+    text-align: center;
+    @include sans-serif-font("Noto Sans CJK JP Thin");
+    margin-bottom: 10px;
+  }
+
+  .formula {
+    display: block;
+    text-align: center;
+    font-size: 48px;
+    color: $neutralColor2;
+  }
+
+  .role {
+    display: block;
+    text-align: center;
+    margin: 40px 0 20px 0;
+
+    .proponent {
+      color: $highlightColor;
+    }
+    .opponent {
+      color: $mainColor2;
+    }
+  }
+
+  .game-steps {
+    border: 3px solid darken($baseColor, 5%);
+    border-radius: 3px;
+
+    li {
+      display: block;
+      text-align: center;
+      line-height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 200ms;
+
+      &:hover {
+        color: $highlightColor;
+      }
+    }
+
+    li:nth-child(2n) {
+      background: darken($baseColor, 2%);
+    }
+    li:nth-child(2n+1) {
+      background: lighten($baseColor, 2%);
+    }
+  }
+}

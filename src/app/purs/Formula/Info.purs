@@ -65,6 +65,7 @@ isPropositional (Pred _ arguments) = length arguments == 0
 isPropositional (Not formula)      = isPropositional formula
 isPropositional (Bin _ f1 f2)      = isPropositional f1 && isPropositional f2
 
+-- | Returns true iff the given formula needs a model to be evaluated
 needsModel :: Formula -> Boolean
 needsModel Top           = false
 needsModel Bot           = false
@@ -72,4 +73,11 @@ needsModel (Quant _ _ _) = true
 needsModel (Pred _ _)    = true
 needsModel (Not formula) = needsModel formula
 needsModel (Bin _ f1 f2) = needsModel f1 || needsModel f2
+
+-- | Returns true iff the given formula is atomic
+isAtomic :: Formula -> Boolean
+isAtomic Top        = true
+isAtomic Bot        = true
+isAtomic (Pred _ _) = true
+isAtomic _          = false
 

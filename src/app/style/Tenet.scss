@@ -32,12 +32,10 @@
   }
 
 
-  &.selectable {
-    li {
-      border-color: rgba($highlightColor, 0.4);
-    }
+  li.selectable {
+    border-color: rgba($highlightColor, 0.4);
 
-    li:hover {
+    &:hover {
       cursor: pointer;
       & > * {
         color: $mainColor2;
@@ -49,9 +47,30 @@
     }
   }
 
+  &.selectable {
+    .role {
+      height: 0;
+    }
+  }
+
   .no-formulae {
     font-size: 16px;
     font-style: italic;
     color: $neutralColor3;
+  }
+
+  .role {
+    display: block;
+    text-transform: uppercase;
+    overflow: hidden;
+    height: 30px;
+    transition: height 200ms, color 200ms;
+
+    &.proponent {
+      color: $highlightColor;
+    }
+    &.opponent {
+      color: $mainColor2;
+    }
   }
 }

@@ -13,9 +13,12 @@ import { SET_FORMULA, EMPTY_DATA, SET_DOMAIN, ADD_DOMAIN_ELEMENT,
          EMPTY_GAME, ADD_TO_TENET, REMOVE_FROM_TENET, SET_ACTIVE_FORMULA, EMPTY_ACTIVE_FORMULA } from 'Actions';
 import Model from 'Purs/Model.purs';
 
-const initialData = { formula: '', model: Model.emptyModel };
-const initialActiveFormula = { fromPlayer: '', formula: '' };
-const initialGame = { tenet1: [], tenet2: [], activeFormula: initialActiveFormula };
+const getEmptyData = () => { return { formula: '', model: Model.emptyModel } };
+const getEmptyActiveFormula = () => { return { fromPlayer: '', formula: '' } };
+const getEmptyGame = () => { return { tenet1: [], tenet2: [], activeFormula: getEmptyActiveFormula() } };
+
+const initialData = getEmptyData();
+const initialGame = getEmptyGame();
 
 /**
  * Reducer for the "data" sub state.
@@ -47,7 +50,7 @@ const data = (state = initialData, action) => {
             newState.model = Model.setPredicateAssignment(action.predicate)(action.assignment)(state.model);
             break;
         case EMPTY_DATA:
-            newState = initialData;
+            newState = getEmptyData();
             break;
     }
 
@@ -77,10 +80,10 @@ const game = (state = initialGame, action) => {
             newState.activeFormula.formula = action.formula;
             break;
         case EMPTY_ACTIVE_FORMULA:
-            newState.activeFormula = initialActiveFormula;
+            newState.activeFormula = getEmptyActiveFormula();
             break;
         case EMPTY_GAME:
-            newState = initialGame;
+            newState = getEmptyGame();
             break;
     }
 

@@ -45,6 +45,18 @@ instance showQuantor :: Show Quantor where
     show Exists = "\8707"
 
 
+-- Substitues all free occurences of a variable with a given term
+substitute :: Variable -> Name -> Formula -> Formula
+substitute variable term formula =
+    case formula of
+        Top              -> formula
+        Bot              -> formula
+        (Not f)          -> Not (substitute variable term f)
+        (Pred name args) -> Pred name (map (\a -> if a == variable then term else a) args)
+        (Bin c f1 f2)    -> Bin c (substitute variable term f1) (substitute variable term f2)
+        (Quant q v f)    -> if v /= variable then Quant q v (substitute variable term f) else formula
+
+
 -- | Returns true iff a formula contains the same predicate symbol with different arities
 hasDuplicatedPredicates :: Formula -> Boolean
 hasDuplicatedPredicates f = fst (hdp (Tuple false []) f)

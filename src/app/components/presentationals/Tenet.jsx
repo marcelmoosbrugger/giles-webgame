@@ -9,6 +9,8 @@
 
 import React from 'react';
 import 'Styles/Tenet.scss';
+import Parser from 'Purs/Formula/Parser.purs';
+import Formula from 'Purs/Formula/Info.purs';
 
 /**
  * Represents a tenet containing formulae
@@ -19,13 +21,15 @@ export default class Tenet extends React.Component {
      * Handles the click on a formula and passes the clicked
      * formula to the callback from the properties.
      *
+     * @param formulaString
      * @param formula
      * @returns {boolean}
      */
-    handleFormulaClick(formula) {
+    handleFormulaClick(formulaString, formula) {
         if (!this.props.selectable) return false;
+        if (Formula.isAtomic(formula)) return false;
 
-        this.props.onSelect(formula);
+        this.props.onSelect(formulaString);
     }
 
     /**
@@ -45,11 +49,17 @@ export default class Tenet extends React.Component {
     renderFormulae() {
         return (
             <ul>
-                {this.props.formulae.map((formula, i) => {
+                {this.props.formulae.map((formulaString, i) => {
+                    let formula = Parser.parse(formulaString).value0;
+                    let selectable = this.props.selectable && !Formula.isAtomic(formula);
                     return (
-                        <li key={i} onClick={this.handleFormulaClick.bind(this, formula)}>
+                        <li
+                            key={i}
+                            onClick={this.handleFormulaClick.bind(this, formulaString, formula)}
+                            className={selectable ? 'selectable' : ''}
+                        >
                             <span className="fa-star-o icon"/>
-                            <span>{formula}</span>
+                            <span>{formulaString}</span>
                         </li>
                     )
                 })}
@@ -60,6 +70,7 @@ export default class Tenet extends React.Component {
     render() {
         return (
             <div className={'box tenet' + (this.props.selectable ? ' selectable' : '')}>
+                <span className={'role ' + (this.props.role.toLowerCase())}>{this.props.role}</span>
                 <label>Tenet Player {this.props.player}</label>
                 {this.props.formulae.length > 0 ? this.renderFormulae() : Tenet.renderEmptyInfo()}
             </div>
