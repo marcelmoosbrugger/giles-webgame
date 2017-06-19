@@ -10,12 +10,13 @@
 import { combineReducers } from 'redux';
 import { SET_FORMULA, EMPTY_DATA, SET_DOMAIN, ADD_DOMAIN_ELEMENT,
          REMOVE_DOMAIN_ELEMENT, SET_VARIABLE_ASSIGNMENT, SET_PREDICATE_ASSIGNMENT,
-         EMPTY_GAME, ADD_TO_TENET, REMOVE_FROM_TENET, SET_ACTIVE_FORMULA, EMPTY_ACTIVE_FORMULA } from 'Actions';
+         EMPTY_GAME, NEW_GAME, APPLY_GAME_STEP, SET_ACTIVE_FORMULA, EMPTY_ACTIVE_FORMULA } from 'Actions';
 import Model from 'Purs/Model.purs';
+import GilesGame from 'Purs/GilesGame.purs';
 
 const getEmptyData = () => { return { formula: '', model: Model.emptyModel } };
-const getEmptyActiveFormula = () => { return { fromPlayer: '', formula: '' } };
-const getEmptyGame = () => { return { tenet1: [], tenet2: [], activeFormula: getEmptyActiveFormula() } };
+const getEmptyActiveFormula = () => { return { proponent: '', formula: '' } };
+const getEmptyGame = () => { return { gameState: GilesGame.emptyGameState, activeFormula: getEmptyActiveFormula() } };
 
 const initialData = getEmptyData();
 const initialGame = getEmptyGame();
@@ -68,19 +69,18 @@ const game = (state = initialGame, action) => {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
-        case ADD_TO_TENET:
-            newState['tenet' + action.player].push(action.formula);
+        case NEW_GAME:
+            newState.gameState = GilesGame.getInitialGameState(action.formula);
+            newState.activeFormula = getEmptyActiveFormula();
             break;
-        case REMOVE_FROM_TENET:
-            const index = newState['tenet' + action.player].indexOf(action.formula);
-            newState['tenet' + action.player].splice(index, 1);
+        case APPLY_GAME_STEP:
+            newState.gameState = GilesGame.applyGameStep(action.proponent)(action.gameStep)(newState.gameState);
+            newState.activeFormula = getEmptyActiveFormula();
             break;
         case SET_ACTIVE_FORMULA:
-            newState.activeFormula.fromPlayer = action.fromPlayer;
+            newState.gameState = GilesGame.removeFromTenet(action.proponent)(action.formula)(newState.gameState);
+            newState.activeFormula.proponent = action.proponent;
             newState.activeFormula.formula = action.formula;
-            break;
-        case EMPTY_ACTIVE_FORMULA:
-            newState.activeFormula = getEmptyActiveFormula();
             break;
         case EMPTY_GAME:
             newState = getEmptyGame();

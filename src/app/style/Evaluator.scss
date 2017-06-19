@@ -1,0 +1,94 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.evaluator {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+
+  .tenet {
+    flex-grow: 1;
+    li {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .negative {
+      * {
+        color: $highlightColor;
+        @include sans-serif-font("Noto Sans CJK JP Bold");
+      }
+    }
+
+    .positive {
+      * {
+        color: $highlightColor2;
+        @include sans-serif-font("Noto Sans CJK JP Bold");
+      }
+    }
+  }
+
+  .thin {
+    @include sans-serif-font("Noto Sans CJK JP Thin");
+  }
+
+  .evaluation {
+    flex-grow: 6;
+    text-align: center;
+  }
+
+  dl {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+
+  em {
+    font-style: normal;
+    color: $mainColor2;
+  }
+
+  .table-list {
+    margin: 30px 20px 0 20px;
+
+    * {
+      @include sans-serif-font("Noto Sans CJK JP Thin");
+    }
+
+    em {
+      color: $neutralColor2;
+      @include sans-serif-font("Noto Sans CJK JP Bold");
+    }
+
+    li:hover * {
+      color: $mainColor2;
+    }
+
+    span {
+      padding: 0 50px;
+    }
+
+    li.active::before {
+      @extend .fa;
+      content: "\f0da";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 5px;
+      color: rgba(#000, 0.1);
+      font-size: 50px;
+      line-height: 50px;
+    }
+  }
+}

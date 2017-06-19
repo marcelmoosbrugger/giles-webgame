@@ -41,8 +41,9 @@ export default class PredicateAssigner extends QuorumValidateable {
      * @returns {boolean} True iff the value has been correctly changed
      */
     onChange(args, event) {
-        const value = event.target.value;
-        if (value >= 0 && value <= 1) {
+        const value = Number(event.target.value);
+
+        if (!isNaN(value) && value >= 0 && value <= 1) {
             this.validate();
             this.props.onChange(args, value);
             return true;

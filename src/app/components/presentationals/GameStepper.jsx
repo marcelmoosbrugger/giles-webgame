@@ -25,7 +25,7 @@ export default class GameStepper extends React.Component {
      * @param gameStep
      */
     handleGameStepClick(gameStep) {
-        this.props.onStepFinished(gameStep.value0.map(Formula.toString), gameStep.value1.map(Formula.toString));
+        this.props.onStepFinished(gameStep);
     }
 
     /**
@@ -69,7 +69,7 @@ export default class GameStepper extends React.Component {
                 <span className="description">Current formula:</span>
                 <span className="formula">{this.props.formula}</span>
                 {this.renderRole()}
-                <ul className="game-steps">
+                <ul className="table-list">
                     {this.choice.value0.map(this.renderGameStep.bind(this))}
                 </ul>
             </div>

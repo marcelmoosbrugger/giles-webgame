@@ -85,13 +85,16 @@ h2 {
 }
 
 dl {
+  width: 100%;
   display: flex;
 
   dd {
+    display: block;
     @include sans-serif-font("Noto Sans CJK JP Thin");
   }
 
   dt {
+    display: block;
     padding-right: 10px;
   }
 }
@@ -156,5 +159,31 @@ dl {
       cursor: pointer;
       background: $baseColor;
     }
+  }
+}
+
+.table-list {
+  border: 3px solid darken($baseColor, 5%);
+  border-radius: 3px;
+
+  li {
+    display: block;
+    text-align: center;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 200ms;
+    position: relative;
+
+    &:hover {
+      color: $highlightColor;
+    }
+  }
+
+  li:nth-child(2n) {
+    background: darken($baseColor, 2%);
+  }
+  li:nth-child(2n+1) {
+    background: lighten($baseColor, 2%);
   }
 }

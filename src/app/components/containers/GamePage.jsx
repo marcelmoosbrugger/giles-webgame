@@ -9,15 +9,14 @@
 
 import { connect } from 'react-redux';
 import GamePageP from 'Presentationals/GamePage.jsx';
-import { setActiveFormula, removeFromTenet, addToTenet, emptyActiveFormula } from 'Actions';
+import { setActiveFormula, applyGameStep, emptyActiveFormula } from 'Actions';
 
 /** Maps the redux state to props which will get passed down **/
 const mapStateToProps = (state) => {
     return {
-        tenet1: state.game.tenet1,
-        tenet2: state.game.tenet2,
+        gameState: state.game.gameState,
         activeFormula: (!!state.game.activeFormula.formula) ? state.game.activeFormula : null,
-        domain: state.data.model.domain
+        model: state.data.model
     }
 };
 
@@ -25,13 +24,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         activateFormula: (player, formula) => {
-            dispatch(removeFromTenet(player, formula));
             dispatch(setActiveFormula(player, formula));
         },
-        applyStep: (formulasPlayer1, formulasPlayer2) => {
-            formulasPlayer1.map(f => { dispatch(addToTenet('1', f)) });
-            formulasPlayer2.map(f => { dispatch(addToTenet('2', f)) });
-            dispatch(emptyActiveFormula());
+        executeGameStep: (proponent, gameStep) => {
+            dispatch(applyGameStep(proponent, gameStep));
         }
     }
 };

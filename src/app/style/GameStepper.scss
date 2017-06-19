@@ -37,29 +37,4 @@
       color: $mainColor2;
     }
   }
-
-  .game-steps {
-    border: 3px solid darken($baseColor, 5%);
-    border-radius: 3px;
-
-    li {
-      display: block;
-      text-align: center;
-      line-height: 50px;
-      font-size: 24px;
-      cursor: pointer;
-      transition: color 200ms;
-
-      &:hover {
-        color: $highlightColor;
-      }
-    }
-
-    li:nth-child(2n) {
-      background: darken($baseColor, 2%);
-    }
-    li:nth-child(2n+1) {
-      background: lighten($baseColor, 2%);
-    }
-  }
 }

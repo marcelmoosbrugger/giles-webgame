@@ -10,6 +10,8 @@
 import React from 'react';
 import Tenet from 'Presentationals/Tenet.jsx';
 import GameStepper from 'Presentationals/GameStepper.jsx';
+import GilesGame from 'Purs/GilesGame.purs';
+import Evaluator from 'Presentationals/Evaluator.jsx';
 import 'Styles/GamePage.scss';
 
 /**
@@ -26,7 +28,7 @@ export default class GamePage extends React.Component {
     getRoleForPlayer(player) {
         if (!this.props.activeFormula) return '';
 
-        if (this.props.activeFormula.fromPlayer === player) {
+        if (this.props.activeFormula.proponent === player) {
             return 'Proponent';
         } else {
             return 'Opponent';
@@ -46,15 +48,10 @@ export default class GamePage extends React.Component {
     /**
      * Handler which gets executed after the user has decided on a game step.
      *
-     * @param formulasProponent The formulas which need to be added to the proponents tenet
-     * @param formulasOpponent The formulas which need to be added to the opponents tenet
+     * @param gameStep The game step to apply
      */
-    onGameStep(formulasProponent, formulasOpponent) {
-        if (this.props.activeFormula.fromPlayer === '1') {
-            this.props.applyStep(formulasProponent, formulasOpponent);
-        } else {
-            this.props.applyStep(formulasOpponent, formulasProponent);
-        }
+    onGameStep(gameStep) {
+        this.props.executeGameStep(this.props.activeFormula.proponent, gameStep);
     }
 
     /**
@@ -69,8 +66,8 @@ export default class GamePage extends React.Component {
             return (
                 <GameStepper
                     formula={this.props.activeFormula.formula}
-                    proponent={this.props.activeFormula.fromPlayer}
-                    domain={this.props.domain}
+                    proponent={this.props.activeFormula.proponent}
+                    domain={this.props.model.domain}
                     onStepFinished={this.onGameStep.bind(this)}
                 />
             );
@@ -78,11 +75,27 @@ export default class GamePage extends React.Component {
     }
 
     render() {
+        // Render components which lets the user evaluate the result, if the game is over
+        if (!this.props.activeFormula) {
+            if (GilesGame.tenetIsAtomic(this.props.gameState.tenet1) && GilesGame.tenetIsAtomic(this.props.gameState.tenet2)) {
+                return (
+                    <div className="game-page">
+                        <Evaluator
+                            model={this.props.model}
+                            tenet1={this.props.gameState.tenet1}
+                            tenet2={this.props.gameState.tenet2}
+                        />
+                    </div>
+                );
+            }
+        }
+
+        // Render components which lets the two players play, if the game is not over
         return (
             <div className="game-page">
                 <Tenet
                     player="1"
-                    formulae={this.props.tenet1}
+                    formulae={this.props.gameState.tenet1}
                     selectable={!this.props.activeFormula}
                     role={this.getRoleForPlayer('1')}
                     onSelect={this.onTenetSelectFormula.bind(this, '1')}
@@ -90,7 +103,7 @@ export default class GamePage extends React.Component {
                 <div className="decision">{this.renderDecision()}</div>
                 <Tenet
                     player="2"
-                    formulae={this.props.tenet2}
+                    formulae={this.props.gameState.tenet2}
                     selectable={!this.props.activeFormula}
                     role={this.getRoleForPlayer('2')}
                     onSelect={this.onTenetSelectFormula.bind(this, '2')}

@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import ModelPageP from 'Presentationals/ModelPage.jsx';
 import { addDomainElement, removeDomainElement,
          setConstantAssignment, setVariableAssignment, setPredicateAssignment,
-         addToTenet, emptyGame } from 'Actions';
+         newGame, emptyGame } from 'Actions';
 
 /** Maps the redux state to props which will get passed down **/
 const mapStateToProps = (state) => {
@@ -37,8 +37,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(setPredicateAssignment(predicate, {args, value}));
         },
         beforeStartGame: (formula) => {
-            dispatch(emptyGame());
-            dispatch(addToTenet('1', formula));
+            dispatch(newGame(formula));
         }
     }
 };

@@ -12,10 +12,11 @@ module Formula.Parser where
 import Prelude
 import Formula
 import Control.Alt ((<|>))
-import Data.Either (Either, isRight)
+import Data.Either (Either, isRight, fromRight)
 import Data.Array (fromFoldable, many)
 import Data.String (singleton)
 import Data.Foldable (fold)
+import Partial.Unsafe (unsafePartial)
 import Text.Parsing.Parser (Parser, ParseError, runParser, fail)
 import Text.Parsing.Parser.String (string, char, oneOf, eof)
 import Text.Parsing.Parser.Combinators (sepBy1, option)
@@ -34,6 +35,10 @@ connectives      = ['\8743', '\0038', '\8744', '\8594']
 -- | Parsing functions
 parse :: String -> Either ParseError Formula
 parse f = runParser f inputFormula
+
+-- | Parses a formula unsafely
+unsafeParse :: String -> Formula
+unsafeParse f = unsafePartial $ fromRight $ parse f
 
 -- | Parses a formula and performs additional checks
 inputFormula :: Parser String Formula

@@ -26,8 +26,7 @@ export default class Tenet extends React.Component {
      * @returns {boolean}
      */
     handleFormulaClick(formulaString, formula) {
-        if (!this.props.selectable) return false;
-        if (Formula.isAtomic(formula)) return false;
+        if (!this.props.selectable || Formula.isAtomic(formula)) return false;
 
         this.props.onSelect(formulaString);
     }
