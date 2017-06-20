@@ -82,8 +82,7 @@ export default class GamePage extends React.Component {
                     <div className="game-page">
                         <Evaluator
                             model={this.props.model}
-                            tenet1={this.props.gameState.tenet1}
-                            tenet2={this.props.gameState.tenet2}
+                            finalGameState={this.props.gameState}
                         />
                     </div>
                 );

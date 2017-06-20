@@ -51,3 +51,11 @@ $fa-font-path: "../../assets/fontawesome/fonts";
   #{$property}: $value;
 }
 
+@keyframes highlight {
+  0% {
+    background: $mainColor3;
+  }
+  100% {
+    background: none;
+  }
+}

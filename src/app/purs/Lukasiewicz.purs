@@ -22,9 +22,11 @@ import Math (round)
 -- | Evaluates a formula in a given model and rounds the result
 evaluate :: Model -> Formula -> Number
 evaluate m f = (round $ result * 100000.0) / 100000.0
-    where result = evaluate' m f
+    where formula = applyVariableAssignments m.variables f
+          result  = evaluate' m formula
 
 -- | Evaluates a formula in a given model without rounding
+-- | Does no substituation of free variables.
 evaluate' :: Model -> Formula -> Number
 evaluate' _ Top              = 1.0
 evaluate' _ Bot              = 0.0

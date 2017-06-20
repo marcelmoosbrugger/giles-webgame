@@ -105,3 +105,11 @@ compareArgs a1 a2 = (length a1.args == length a2.args) && (and $ zipWith (==) a1
 -- | Helper function which determines if two predicate assignments belong to the same predicate
 comparePredAss :: PredicateAssignment -> PredicateAssignment -> Boolean
 comparePredAss p1 p2 = p1.predicate == p2.predicate
+
+-- | Applies an array of variable assignemnts to a formula by substituting all variables
+-- | by their corresponding element.
+applyVariableAssignments :: (Array VariableAssignment) -> Formula -> Formula
+applyVariableAssignments assignments f =
+    case uncons assignments of
+        Nothing -> f
+        Just { head: va, tail: vas } -> applyVariableAssignments vas (substitute va.variable va.element f)

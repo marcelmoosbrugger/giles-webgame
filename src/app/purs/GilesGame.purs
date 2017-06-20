@@ -14,9 +14,11 @@ import Formula
 import Formula.Info (isAtomic)
 import Formula.Parser (unsafeParse)
 import Model
+import Lukasiewicz
 import Data.Array (delete)
-import Data.Foldable (and)
+import Data.Foldable (and, sum)
 import Data.String (joinWith, length)
+import Math (round)
 
 -- | To be able to store the tenets in redux, Formulas are represented as strings here
 type FormulaString = String
@@ -60,6 +62,28 @@ applyGameStep proponent (GameStep fs1 fs2) s = { tenet1: tenet1, tenet2: tenet2 
 tenetIsAtomic :: Tenet -> Boolean
 tenetIsAtomic = and <<< map isAtomic <<< map unsafeParse
 
+-- | Converts a single game step to a human readable form
+stepToString :: GameStep -> String
+stepToString (GameStep [] [])   = "Do nothing."
+stepToString (GameStep fs1 fs2) = proponentString <> opponentString <> "."
+    where string1 = joinWith "," fs1
+          string2 = joinWith "," fs2
+          proponentString = "Add " <> string1 <> " to proponent's tenet"
+          opponentString = if length string2 > 0
+                            then ", and " <> string2 <> " to opponent's tenet"
+                            else ""
+
+-- | Returns the expected payment which needs to be made to the other player
+-- | based on a given model and a given tenet.
+expectedPaymentForTenet :: Model -> Tenet -> Number
+expectedPaymentForTenet m t = sum $ map ((\v -> 1.0 - v) <<< evaluate m <<< unsafeParse) t
+
+-- | Returns the risk of a given game step, from the viewpoint of the first player
+riskForGameState :: Model -> GameState -> Number
+riskForGameState m gs = (round $ (expectedPayment1 - expectedPayment2) * 100000.0) / 100000.0
+    where expectedPayment1 = expectedPaymentForTenet m gs.tenet1
+          expectedPayment2 = expectedPaymentForTenet m gs.tenet2
+
 -- | ----------------------------------------------------
 -- | The functions which construct the choice structures
 -- | depending on a given formula.
@@ -99,14 +123,3 @@ getChoiceForQuant domain (Quant quantor v f) =
     where substitues = map (\element -> substitute v element f) domain
           steps      = map (\f -> gameStep [f] []) substitues
 getChoiceForQuant _ _ = noChoice
-
--- | Converts a single game step to a human readable form
-stepToString :: GameStep -> String
-stepToString (GameStep [] [])   = "Do nothing."
-stepToString (GameStep fs1 fs2) = proponentString <> opponentString <> "."
-    where string1 = joinWith "," fs1
-          string2 = joinWith "," fs2
-          proponentString = "Add " <> string1 <> " to proponent's tenet"
-          opponentString = if length string2 > 0
-                            then ", and " <> string2 <> " to opponent's tenet"
-                            else ""

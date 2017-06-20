@@ -66,7 +66,7 @@ export default class FormulaPage extends React.Component {
      * Handles the click on the next button.
      */
     handleButtonClick() {
-        if (!!this.state.error) return;
+        if (this.state.success !== true) return;
 
         this.props.history.push('/model');
     }

@@ -50,10 +50,6 @@
     margin-bottom: 10px;
   }
 
-  button {
-    margin-top: 20px;
-  }
-
   em {
     font-style: normal;
     color: $mainColor2;
@@ -61,9 +57,15 @@
 
   .table-list {
     margin: 30px 20px 0 20px;
+    display: flex;
+    flex-direction: column-reverse;
 
     * {
       @include sans-serif-font("Noto Sans CJK JP Thin");
+    }
+
+    li {
+      animation: highlight 750ms;
     }
 
     em {
@@ -89,6 +91,46 @@
       color: rgba(#000, 0.1);
       font-size: 50px;
       line-height: 50px;
+    }
+  }
+
+  .buttons {
+    margin: 20px auto 0 auto;
+    position: relative;
+    width: 390px;
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 3px;
+      color: white;
+      background: $highlightColor;
+      line-height: 40px;
+      padding: 0 60px;
+      font-size: 16px;
+      text-transform: uppercase;
+      box-sizing: border-box;
+      @include sans-serif-font("Noto Sans CJK JP Medium");
+      opacity: 1;
+      display: block;
+    }
+
+    button:nth-child(2n) {
+      margin-right: 10px;
+    }
+
+    button:nth-child(2n+1) {
+      margin-left: 10px;
+    }
+
+    &:hover {
+      .overlay {
+        display: none;
+      }
     }
   }
 }
