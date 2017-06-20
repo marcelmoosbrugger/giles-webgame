@@ -22,8 +22,8 @@ import Text.Parsing.Parser.String (string, char, oneOf, eof)
 import Text.Parsing.Parser.Combinators (sepBy1, option)
 
 -- | Definiton of allowed symbols
-uppercase   = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-lowercaseAT = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t']
+uppercase   = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Ä','Ö','Ü']
+lowercaseAT = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','ö','ä','ü']
 lowercaseUZ = ['u','v','w','x','y','z']
 allChars    = uppercase <> lowercaseAT <> lowercaseUZ
 
@@ -119,4 +119,8 @@ predicateName = primed \_ -> singleton <$> oneOf predicateSymbols
 
 -- | Test a given string if it can be parsed by a given parser
 is :: forall a . String -> Parser String a -> Boolean
-is string parser = isRight (runParser string parser)
+is string parser = isRight (runParser string (parser *> eof))
+
+-- | Helper function for JavaScript
+isConstant :: String -> Boolean
+isConstant s = s `is` constant

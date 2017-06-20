@@ -9,6 +9,7 @@
 
 import React from 'react';
 import QuorumValidateable from 'Abstracts/QuorumValidatable';
+import Parser from 'Purs/Formula/Parser.purs';
 import 'Styles/DomainCreator.scss';
 
 /**
@@ -43,7 +44,16 @@ export default class DomainCreator extends QuorumValidateable {
      */
     handleInputChange() {
         const input = this.refs.input.value.trim();
-        this.setState({ inputValid: input.length > 0 && this.props.domain.indexOf(input) === -1 });
+        this.setState({ inputValid: this.inputIsValid(input) });
+    }
+
+    inputIsValid(input) {
+        if (input.length === 0) return false;
+        if (this.props.domain.indexOf(input) !== -1) return false;
+
+        console.log(input, Parser.isConstant(input));
+
+        return Parser.isConstant(input);
     }
 
     /**
