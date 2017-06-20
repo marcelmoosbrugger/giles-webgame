@@ -1,0 +1,64 @@
+/*
+ * This file is part of Gile's Webgame.
+ *
+ * (c) Marcel Moosbrugger
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+@import "definitions";
+
+.players-assigner {
+  margin-top: 40px;
+  margin-bottom: 60px;
+  opacity: 0.5;
+  transition: opacity 200ms;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .player {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+    align-items: center;
+
+    label {
+      margin: 0 20px 0 0;
+      font-size: 38px;
+      color: $neutralColor3;
+      line-height: 38px;
+    }
+  }
+
+  .select {
+    display: block;
+
+    select {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding-right: 25px;
+      font-size: 38px;
+      text-transform: uppercase;
+      color: $mainColor1;
+      @include sans-serif-font("Noto Sans CJK JP Bold");
+    }
+
+    &::after {
+      @extend .fa;
+      content: "\f13a";
+      margin-left: -20px;
+      color: $mainColor2;
+      pointer-events: none;
+      cursor: pointer;
+      font-size: 32px;
+      line-height: 38px;
+      background: $baseColor;
+    }
+  }
+}

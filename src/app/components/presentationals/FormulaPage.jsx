@@ -9,6 +9,7 @@
 
 import React from 'react';
 import FormulaCreator from 'Presentationals/FormulaCreator.jsx';
+import PlayersAssigner from "Presentationals/PlayersAssigner.jsx";
 import 'Styles/FormulaPage.scss';
 
 /**
@@ -106,6 +107,10 @@ export default class FormulaPage extends React.Component {
                         onError={this.handleError.bind(this)}
                         onSuccess={this.handleSuccess.bind(this)}
                         onEdit={this.handleEdit.bind(this)}
+                    />
+                    <PlayersAssigner
+                        players={this.props.players}
+                        onChange={this.props.onPlayerChange}
                     />
                     <div className="next-row">
                         <button

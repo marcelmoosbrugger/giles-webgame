@@ -10,7 +10,8 @@
 import { combineReducers } from 'redux';
 import { SET_FORMULA, EMPTY_DATA, SET_DOMAIN, ADD_DOMAIN_ELEMENT,
          REMOVE_DOMAIN_ELEMENT, SET_VARIABLE_ASSIGNMENT, SET_PREDICATE_ASSIGNMENT,
-         EMPTY_GAME, NEW_GAME, APPLY_GAME_STEP, SET_ACTIVE_FORMULA, EMPTY_ACTIVE_FORMULA } from 'Actions';
+         EMPTY_GAME, NEW_GAME, APPLY_GAME_STEP, SET_ACTIVE_FORMULA, EMPTY_ACTIVE_FORMULA,
+         SET_PLAYER } from 'Actions';
 import Model from 'Purs/Model.purs';
 import GilesGame from 'Purs/GilesGame.purs';
 
@@ -20,6 +21,7 @@ const getEmptyGame = () => { return { gameState: GilesGame.emptyGameState, activ
 
 const initialData = getEmptyData();
 const initialGame = getEmptyGame();
+const initialPlayers = { player1: 'HUMAN', player2: 'HUMAN' };
 
 /**
  * Reducer for the "data" sub state.
@@ -59,7 +61,7 @@ const data = (state = initialData, action) => {
 };
 
 /**
- * Reducer for the "game sub state.
+ * Reducer for the "game" sub state.
  *
  * @param state The sub state to modify with the action.
  * @param action The action which describes how to modify the state
@@ -91,10 +93,29 @@ const game = (state = initialGame, action) => {
 };
 
 /**
+ * Reducer for the "players" sub state
+ *
+ * @param state The sub state to modify with the action.
+ * @param action The action which describes how to modify the state
+ * @returns {Object} The new state
+ */
+const players = (state = initialPlayers, action) => {
+    let newState = Object.assign({}, state);
+
+    switch (action.type) {
+        case SET_PLAYER:
+            newState['player' + action.player] = action.value;
+            break;
+    }
+
+    return Object.assign({}, state, newState);
+};
+
+/**
  * Combines the sub reducers.
  *
  * @type {Reducer}
  */
-const reducer = combineReducers({ data, game });
+const reducer = combineReducers({ data, game, players });
 
 export default reducer;

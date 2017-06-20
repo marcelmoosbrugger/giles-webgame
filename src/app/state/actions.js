@@ -22,6 +22,8 @@ export const APPLY_GAME_STEP = 'APPLY_GAME_STEP';
 export const EMPTY_GAME = 'EMPTY_GAME';
 export const SET_ACTIVE_FORMULA = 'SET_ACTIVE_FORMULA';
 
+export const SET_PLAYER = 'SET_PLAYER';
+
 /** Actions **/
 
 export const setFormula = (formula) => {
@@ -66,4 +68,8 @@ export const emptyGame = () => {
 
 export const setActiveFormula = (proponent, formula) => {
     return { type: SET_ACTIVE_FORMULA, proponent, formula };
+};
+
+export const setPlayer = (player, value) => {
+    return { type: SET_PLAYER, player, value };
 };

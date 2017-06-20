@@ -9,11 +9,12 @@
 
 import { connect } from 'react-redux';
 import FormulaPageP from 'Presentationals/FormulaPage.jsx';
-import { emptyData, setFormula, setDomain } from 'Actions';
+import { emptyData, setFormula, setDomain, setPlayer } from 'Actions';
 
 /** Maps the redux state to props which will get passed down **/
 const mapStateToProps = (state) => {
     return {
+        players: state.players,
         formula: state.data.formula
     }
 };
@@ -25,6 +26,9 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(emptyData());
             dispatch(setFormula(formula));
             dispatch(setDomain(constants));
+        },
+        onPlayerChange(player, value) {
+            dispatch(setPlayer(player, value));
         }
     }
 };
