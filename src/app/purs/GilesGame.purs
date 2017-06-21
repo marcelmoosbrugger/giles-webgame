@@ -15,9 +15,10 @@ import Formula.Info (isAtomic)
 import Formula.Parser (unsafeParse)
 import Model
 import Lukasiewicz
-import Data.Array (delete)
+import Data.Array (delete, length, zipWith)
 import Data.Foldable (and, sum)
-import Data.String (joinWith, length)
+import Data.String (joinWith, length) as S
+import Data.Int (toNumber)
 import Math (round)
 
 -- | To be able to store the tenets in redux, Formulas are represented as strings here
@@ -33,6 +34,12 @@ data Role = Proponent | Opponent
 data GameStep = GameStep (Array FormulaString) (Array FormulaString)
 -- An array of game-steps to choose from. The role marks the player who has the choice
 data Choice = Choice (Array GameStep) Role
+
+derive instance eqRole :: Eq Role
+
+instance eqGameStep :: Eq GameStep where
+    eq (GameStep fs1 fs2) (GameStep fs1' fs2') = (arrayEq fs1 fs1') && (arrayEq fs2 fs2')
+        where arrayEq a1 a2 = (length a1 == length a2) && (and $ zipWith (==) a1 a2)
 
 -- | Represents the empty choice
 noChoice :: Choice
@@ -66,23 +73,25 @@ tenetIsAtomic = and <<< map isAtomic <<< map unsafeParse
 stepToString :: GameStep -> String
 stepToString (GameStep [] [])   = "Do nothing."
 stepToString (GameStep fs1 fs2) = proponentString <> opponentString <> "."
-    where string1 = joinWith "," fs1
-          string2 = joinWith "," fs2
+    where string1 = S.joinWith "," fs1
+          string2 = S.joinWith "," fs2
           proponentString = "Add " <> string1 <> " to proponent's tenet"
-          opponentString = if length string2 > 0
+          opponentString = if S.length string2 > 0
                             then ", and " <> string2 <> " to opponent's tenet"
                             else ""
 
--- | Returns the expected payment which needs to be made to the other player
--- | based on a given model and a given tenet.
-expectedPaymentForTenet :: Model -> Tenet -> Number
-expectedPaymentForTenet m t = sum $ map ((\v -> 1.0 - v) <<< evaluate m <<< unsafeParse) t
+-- | Returns the risk of a given game state, from the viewpoint of the first player
+riskForGameState :: Model -> GameState -> Number
+riskForGameState m gs = (round $ (length1 - length2 + values2 - values1) * 100000.0) / 100000.0
+    where values1 = sum $ map (evaluate m <<< unsafeParse) gs.tenet1
+          values2 = sum $ map (evaluate m <<< unsafeParse) gs.tenet2
+          length1 = toNumber $ length gs.tenet1
+          length2 = toNumber $ length gs.tenet2
 
 -- | Returns the risk of a given game step, from the viewpoint of the first player
-riskForGameState :: Model -> GameState -> Number
-riskForGameState m gs = (round $ (expectedPayment1 - expectedPayment2) * 100000.0) / 100000.0
-    where expectedPayment1 = expectedPaymentForTenet m gs.tenet1
-          expectedPayment2 = expectedPaymentForTenet m gs.tenet2
+riskForStep :: Model -> GameState -> Player -> GameStep -> Number
+riskForStep model state proponent step = riskForGameState model resultingGameState
+    where resultingGameState = applyGameStep proponent step state
 
 -- | ----------------------------------------------------
 -- | The functions which construct the choice structures

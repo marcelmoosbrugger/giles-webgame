@@ -11,13 +11,21 @@ import React from 'react';
 import 'Styles/GameStepper.scss';
 import Parser from 'Purs/Formula/Parser.purs';
 import GilesGame from 'Purs/GilesGame.purs';
-import Formula from 'Purs/Formula.purs';
+import Player from 'Purs/GilesGame/Player.purs';
 
 /**
  * Represents the component which allows the users
  * to make a decision based on the current active formula.
  */
 export default class GameStepper extends React.Component {
+
+    getRoleForPlayer(player) {
+        if (this.props.proponent === player) {
+            return new GilesGame.Proponent();
+        }
+
+        return new GilesGame.Opponent();
+    }
 
     /**
      * Handler which gets executed when a player clicks on a game step.
@@ -63,6 +71,9 @@ export default class GameStepper extends React.Component {
     render() {
         this.formula = Parser.parse(this.props.formula).value0;
         this.choice = GilesGame.getChoice(this.props.domain)(this.formula);
+
+        console.log('Best action P1', Player.decideOnAction(this.props.model)(this.props.gameState)(this.props.proponent)('1')(this.getRoleForPlayer('1'))(this.choice));
+        console.log('Best action P2', Player.decideOnAction(this.props.model)(this.props.gameState)(this.props.proponent)('2')(this.getRoleForPlayer('2'))(this.choice));
 
         return (
             <div className="game-stepper">

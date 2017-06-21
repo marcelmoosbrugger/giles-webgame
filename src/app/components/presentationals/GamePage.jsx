@@ -69,6 +69,8 @@ export default class GamePage extends React.Component {
                     proponent={this.props.activeFormula.proponent}
                     domain={this.props.model.domain}
                     onStepFinished={this.onGameStep.bind(this)}
+                    model={this.props.model}
+                    gameState={this.props.gameState}
                 />
             );
         }
