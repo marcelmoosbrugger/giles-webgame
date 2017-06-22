@@ -19,6 +19,37 @@ import Player from 'Purs/GilesGame/Player.purs';
  */
 export default class GameStepper extends React.Component {
 
+    /**
+     * Executes all passed functions with an increasing delay.
+     * The first function gets executed after 5 seconds, the second function after 10 seconds and so on.
+     */
+    static computerPlayerActivity() {
+        for (let i = 0; i < arguments.length; i++) {
+            setTimeout(arguments[i], 5000 * (i + 1));
+        }
+    }
+
+    /**
+     * Takes an action of a computer player and executes it.
+     *
+     * @param action
+     */
+    loadComputerAction(action) {
+        if (action.actionType.constructor.name === 'DoNothing') return;
+
+        this.computerWillChoose = true;
+        GameStepper.computerPlayerActivity(
+            () => this.domChoices[action.gameStepIndex].classList.add('computer-will-select'),
+            () => this.props.onStepFinished(action.gameStep)
+        );
+    }
+
+    /**
+     * For a given player it returns the current role of the player.
+     *
+     * @param player
+     * @returns {Object} The curren trole of the player
+     */
     getRoleForPlayer(player) {
         if (this.props.proponent === player) {
             return new GilesGame.Proponent();
@@ -33,6 +64,8 @@ export default class GameStepper extends React.Component {
      * @param gameStep
      */
     handleGameStepClick(gameStep) {
+        if (this.computerWillChoose === true) return false;
+
         this.props.onStepFinished(gameStep);
     }
 
@@ -60,6 +93,7 @@ export default class GameStepper extends React.Component {
     renderGameStep(gameStep, i) {
         return (
             <li
+                ref={step => {this.domChoices[i] = step}}
                 key={i}
                 onClick={this.handleGameStepClick.bind(this, gameStep)}
             >
@@ -71,9 +105,26 @@ export default class GameStepper extends React.Component {
     render() {
         this.formula = Parser.parse(this.props.formula).value0;
         this.choice = GilesGame.getChoice(this.props.domain)(this.formula);
+        this.domChoices = [];
+        this.computerWillChoose = false;
+        this.decideOnAction = player => Player.decideOnAction
+            (this.props.model)
+            (this.props.gameState)
+            (this.props.proponent)
+            (player)
+            (this.getRoleForPlayer(player))
+            (this.choice);
 
-        console.log('Best action P1', Player.decideOnAction(this.props.model)(this.props.gameState)(this.props.proponent)('1')(this.getRoleForPlayer('1'))(this.choice));
-        console.log('Best action P2', Player.decideOnAction(this.props.model)(this.props.gameState)(this.props.proponent)('2')(this.getRoleForPlayer('2'))(this.choice));
+        // If either of the player is a computer, we decide
+        // on an action and laod the action up
+        if (this.props.players.player1 === 'COMPUTER') {
+            const action = this.decideOnAction('1');
+            this.loadComputerAction(action);
+        }
+        if (this.props.players.player2 === 'COMPUTER') {
+            const action = this.decideOnAction('2');
+            this.loadComputerAction(action);
+        }
 
         return (
             <div className="game-stepper">

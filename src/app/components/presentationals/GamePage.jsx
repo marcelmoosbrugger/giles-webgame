@@ -12,12 +12,29 @@ import Tenet from 'Presentationals/Tenet.jsx';
 import GameStepper from 'Presentationals/GameStepper.jsx';
 import GilesGame from 'Purs/GilesGame.purs';
 import Evaluator from 'Presentationals/Evaluator.jsx';
+import Formula from 'Purs/Formula/Info.purs';
+import Parser from 'Purs/Formula/Parser.purs';
 import 'Styles/GamePage.scss';
 
 /**
  * Represents the page where the actual game is played
  */
 export default class GamePage extends React.Component {
+
+    /**
+     * Selects a random formula from a random tenet and activates it after a timeout.
+     */
+    laodRandomFormulaSelection() {
+        let randomPlayer, randomFormulaIndex, randomFormula;
+
+        do {
+            randomPlayer = Math.floor((Math.random() * 2) + 1).toString();
+            randomFormulaIndex = Math.floor(Math.random() * this.props.gameState['tenet' + randomPlayer].length);
+            randomFormula = this.props.gameState['tenet' + randomPlayer][randomFormulaIndex];
+        } while (Formula.isAtomic(Parser.parse(randomFormula).value0));
+
+        setTimeout(() => { this.props.activateFormula(randomPlayer, randomFormula) }, 2000);
+    }
 
     /**
      * Returns the role of a given player.
@@ -57,10 +74,17 @@ export default class GamePage extends React.Component {
     /**
      * Renders the elements which allow the player to decide on the next game step.
      *
+     * @param bothPlayersComputers
      * @returns A react dom object
      */
-    renderDecision() {
+    renderDecision(bothPlayersComputers) {
         if (!this.props.activeFormula) {
+
+            // If both players are computers. A random formula from both tenets gets selected after a timeout
+            if (bothPlayersComputers) {
+                this.laodRandomFormulaSelection();
+            }
+
             return <span className="no-formula">Select a formula from the tenets</span>
         } else {
             return (
@@ -71,12 +95,15 @@ export default class GamePage extends React.Component {
                     onStepFinished={this.onGameStep.bind(this)}
                     model={this.props.model}
                     gameState={this.props.gameState}
+                    players={this.props.players}
                 />
             );
         }
     }
 
     render() {
+        const bothPlayersComputers = this.props.players.player1 === 'COMPUTER' && this.props.players.player2 === 'COMPUTER';
+
         // Render components which lets the user evaluate the result, if the game is over
         if (!this.props.activeFormula) {
             if (GilesGame.tenetIsAtomic(this.props.gameState.tenet1) && GilesGame.tenetIsAtomic(this.props.gameState.tenet2)) {
@@ -97,15 +124,15 @@ export default class GamePage extends React.Component {
                 <Tenet
                     player="1"
                     formulae={this.props.gameState.tenet1}
-                    selectable={!this.props.activeFormula}
+                    selectable={!this.props.activeFormula && !bothPlayersComputers}
                     role={this.getRoleForPlayer('1')}
                     onSelect={this.onTenetSelectFormula.bind(this, '1')}
                 />
-                <div className="decision">{this.renderDecision()}</div>
+                <div className="decision">{this.renderDecision(bothPlayersComputers)}</div>
                 <Tenet
                     player="2"
                     formulae={this.props.gameState.tenet2}
-                    selectable={!this.props.activeFormula}
+                    selectable={!this.props.activeFormula && !bothPlayersComputers}
                     role={this.getRoleForPlayer('2')}
                     onSelect={this.onTenetSelectFormula.bind(this, '2')}
                 />

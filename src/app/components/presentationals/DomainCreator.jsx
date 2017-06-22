@@ -47,11 +47,15 @@ export default class DomainCreator extends QuorumValidateable {
         this.setState({ inputValid: this.inputIsValid(input) });
     }
 
+    /**
+     * Determines whether a given input is valid as a domain element or not.
+     *
+     * @param input
+     * @returns {boolean}
+     */
     inputIsValid(input) {
         if (input.length === 0) return false;
         if (this.props.domain.indexOf(input) !== -1) return false;
-
-        console.log(input, Parser.isConstant(input));
 
         return Parser.isConstant(input);
     }

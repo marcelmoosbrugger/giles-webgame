@@ -49,6 +49,10 @@ noChoice = Choice [] Proponent
 emptyGameState :: GameState
 emptyGameState = { tenet1: [], tenet2: [] }
 
+-- | Represents the empty game step
+emptyGameStep :: GameStep
+emptyGameStep = GameStep [] []
+
 -- | Initializes the game state with a given formula
 getInitialGameState :: FormulaString -> GameState
 getInitialGameState f = { tenet1: [f], tenet2: [] }

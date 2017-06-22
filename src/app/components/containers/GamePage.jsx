@@ -16,7 +16,8 @@ const mapStateToProps = (state) => {
     return {
         gameState: state.game.gameState,
         activeFormula: (!!state.game.activeFormula.formula) ? state.game.activeFormula : null,
-        model: state.data.model
+        model: state.data.model,
+        players: state.players
     }
 };
 
