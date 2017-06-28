@@ -19,6 +19,16 @@ $neutralColor2: #404040;
 $neutralColor3: #7F7F7F;
 $neutralColor4: #CFCFCF;
 
+@import "../../../node_modules/outdated-browser-rework/outdated-browser-rework";
+#outdated {
+  box-sizing: border-box;
+  height: 200px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+
 $fa-font-path: "../../assets/fontawesome/fonts";
 @import "../../assets/fontawesome/scss/font-awesome";
 

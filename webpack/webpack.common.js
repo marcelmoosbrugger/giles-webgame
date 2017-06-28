@@ -26,11 +26,12 @@ module.exports = {
         app: [
             'react-hot-loader/patch',
             APP_DIR + '/index.jsx'
-        ]
+        ],
+        oldbrowser: APP_DIR + '/oldbrowser.js'
     },
     output: {
         path: DIST_DIR,
-        filename: 'index_bundle.js'
+        filename: '[name].bundle.js'
     },
     module: {
         rules: [
