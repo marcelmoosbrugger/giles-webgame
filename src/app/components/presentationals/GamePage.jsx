@@ -31,7 +31,7 @@ export default class GamePage extends React.Component {
             randomPlayer = Math.floor((Math.random() * 2) + 1).toString();
             randomFormulaIndex = Math.floor(Math.random() * this.props.gameState['tenet' + randomPlayer].length);
             randomFormula = this.props.gameState['tenet' + randomPlayer][randomFormulaIndex];
-        } while (Formula.isAtomic(Parser.parse(randomFormula).value0));
+        } while (!randomFormula || Formula.isAtomic(Parser.parse(randomFormula).value0));
 
         setTimeout(() => { this.props.activateFormula(randomPlayer, randomFormula) }, 2000);
     }

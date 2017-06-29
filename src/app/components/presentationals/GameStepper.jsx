@@ -25,7 +25,7 @@ export default class GameStepper extends React.Component {
      */
     static computerPlayerActivity() {
         for (let i = 0; i < arguments.length; i++) {
-            setTimeout(arguments[i], 5000 * (i + 1));
+            setTimeout(arguments[i], 2000 * (i + 1));
         }
     }
 
