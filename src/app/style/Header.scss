@@ -28,7 +28,7 @@
     .text {
       display: inline-block;
       padding: 0 5px;
-      @include serif-font("Noto Serif");
+      @include serif-font;
     }
 
     .icon {
@@ -62,7 +62,7 @@
     }
   }
 
-  .author, .author * {
-    @include sans-serif-font("Noto Sans CJK JP Thin");
+  .author {
+    opacity: 0.6;
   }
 }

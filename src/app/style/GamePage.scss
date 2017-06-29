@@ -35,7 +35,7 @@
     width: 100%;
     display: block;
     text-align: center;
-    @include sans-serif-font("Noto Sans CJK JP Bold");
+    font-weight: bold;
     text-transform: uppercase;
     font-size: $size;
     color: $neutralColor4;

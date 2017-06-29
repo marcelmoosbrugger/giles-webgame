@@ -14,7 +14,7 @@
   .description {
     display: block;
     text-align: center;
-    @include sans-serif-font("Noto Sans CJK JP Thin");
+    opacity: 0.6;
     margin-bottom: 10px;
   }
 

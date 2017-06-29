@@ -29,11 +29,16 @@
     padding-top: 12px;
     padding-left: 10px;
     transition: opacity 0.2s;
+    dt {
+      opacity: 0.6;
+    }
+    dd {
+      opacity: 1;
+    }
     dd span {
       display: inline-block;
       color: $highlightColor;
       border-bottom: 1px dashed $highlightColor;
-      @include sans-serif-font("Noto Sans CJK JP Regular");
     }
   }
 

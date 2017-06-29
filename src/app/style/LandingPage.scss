@@ -34,7 +34,7 @@
       position: relative;
       top: -2px;
       color: $mainColor1;
-      @include sans-serif-font("Noto Sans CJK JP Bold");
+      font-weight: bold;
       transition: color 0.2s;
 
       &:hover {

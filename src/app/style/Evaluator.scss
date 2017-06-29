@@ -24,20 +24,20 @@
     .negative {
       * {
         color: $highlightColor;
-        @include sans-serif-font("Noto Sans CJK JP Bold");
+        font-weight: bold;
       }
     }
 
     .positive {
       * {
         color: $highlightColor2;
-        @include sans-serif-font("Noto Sans CJK JP Bold");
+        font-weight: bold;
       }
     }
   }
 
   .thin {
-    @include sans-serif-font("Noto Sans CJK JP Thin");
+    opacity: 0.6;
   }
 
   .evaluation {
@@ -60,17 +60,16 @@
     display: flex;
     flex-direction: column-reverse;
 
-    * {
-      @include sans-serif-font("Noto Sans CJK JP Thin");
-    }
-
     li {
       animation: highlight 750ms;
+      span {
+        color: $neutralColor3;
+      }
     }
 
     em {
+      font-weight: bold;
       color: $neutralColor2;
-      @include sans-serif-font("Noto Sans CJK JP Bold");
     }
 
     li:hover * {
@@ -114,7 +113,7 @@
       font-size: 16px;
       text-transform: uppercase;
       box-sizing: border-box;
-      @include sans-serif-font("Noto Sans CJK JP Medium");
+      font-weight: bold;
       opacity: 1;
       display: block;
     }

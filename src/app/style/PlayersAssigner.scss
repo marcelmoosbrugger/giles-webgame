@@ -46,19 +46,22 @@
       font-size: 38px;
       text-transform: uppercase;
       color: $mainColor1;
-      @include sans-serif-font("Noto Sans CJK JP Bold");
+      font-weight: bold;
+      height: 55px;
     }
 
     &::after {
       @extend .fa;
       content: "\f13a";
-      margin-left: -20px;
       color: $mainColor2;
       pointer-events: none;
       cursor: pointer;
       font-size: 32px;
-      line-height: 38px;
       background: $baseColor;
+      height: 55px;
+      line-height: 55px;
+      vertical-align: top;
+      margin-left: -20px;
     }
   }
 }

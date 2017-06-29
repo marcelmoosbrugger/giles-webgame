@@ -21,7 +21,7 @@ body > * {
 }
 
 * {
-  @include sans-serif-font("Noto Sans");
+  @include sans-serif-font;
   color: $neutralColor;
 }
 
@@ -34,7 +34,7 @@ a {
 }
 
 p {
-  @include serif-font("Noto Serif");
+  @include serif-font;
   margin-bottom: 20px;
   font-size: 18px;
   line-height: 22px;
@@ -51,7 +51,7 @@ button {
   font-size: 16px;
   text-transform: uppercase;
   outline: none;
-  @include sans-serif-font("Noto Sans CJK JP Medium");
+  font-weight: bold;
   transition: background 0.2s;
 
   &.disabled {
@@ -67,18 +67,18 @@ button {
 }
 
 label {
-  @include sans-serif-font("Noto Sans CJK JP Thin");
+  opacity: 0.6;
 }
 
 h1 {
-  @include sans-serif-font("Noto Sans CJK JP Thin");
+  opacity: 0.9;
   font-size: 42px;
   margin-top: 20px;
   margin-bottom: 40px;
 }
 
 h2 {
-  @include sans-serif-font("Noto Sans CJK JP Thin");
+  opacity: 0.9;
   font-size: 28px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -90,7 +90,7 @@ dl {
 
   dd {
     display: block;
-    @include sans-serif-font("Noto Sans CJK JP Thin");
+    opacity: 0.6;
   }
 
   dt {
@@ -133,7 +133,8 @@ dl {
   background: rgba($baseColor, 0.6);
 
   label {
-    @include sans-serif-font("Noto Sans CJK JP Bold");
+    opacity: 1;
+    font-weight: bold;
     text-transform: uppercase;
     display: block;
     margin-bottom: 10px;
@@ -153,11 +154,16 @@ dl {
     &::after {
       @extend .fa;
       content: "\f13a";
-      margin-left: -20px;
+      margin-left: -25px;
+      height: 25px;
+      width: 25px;
       color: $mainColor2;
       pointer-events: none;
       cursor: pointer;
       background: $baseColor;
+      vertical-align: top;
+      line-height: 25px;
+      padding-top: 5px;
     }
   }
 }

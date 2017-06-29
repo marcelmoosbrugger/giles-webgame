@@ -35,16 +35,15 @@ $fa-font-path: "../../assets/fontawesome/fonts";
 *[class^="fa"] {
   @extend .fa;
 }
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif:400,700');
 
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif');
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
-
-@mixin serif-font($font) {
-  font-family: $font, "Times New Roman", Times, serif;
+@mixin serif-font {
+  font-family: "Noto Serif", "Times New Roman", Times, serif;
 }
 
-@mixin sans-serif-font($font) {
-  font-family: $font, Arial, Helvetica, sans-serif;
+@mixin sans-serif-font {
+  font-family: "Noto Sans", Arial, Helvetica, sans-serif;
 }
 
 /// Mixin to prefix a property
@@ -69,3 +68,6 @@ $fa-font-path: "../../assets/fontawesome/fonts";
     background: none;
   }
 }
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
