@@ -24,6 +24,9 @@ export const SET_ACTIVE_FORMULA = 'SET_ACTIVE_FORMULA';
 
 export const SET_PLAYER = 'SET_PLAYER';
 
+export const SET_INFO_IS_VISIBLE = 'SET_INFO_IS_VISIBLE';
+export const SET_INFO_CONTENT = 'SET_INFO_CONTENT';
+
 /** Actions **/
 
 export const setFormula = (formula) => {
@@ -72,4 +75,12 @@ export const setActiveFormula = (proponent, formula) => {
 
 export const setPlayer = (player, value) => {
     return { type: SET_PLAYER, player, value };
+};
+
+export const setInfoIsVisible = (isVisible) => {
+    return { type: SET_INFO_IS_VISIBLE, isVisible };
+};
+
+export const setInfoContent = (content) => {
+    return { type: SET_INFO_CONTENT, content };
 };

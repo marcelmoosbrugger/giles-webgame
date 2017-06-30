@@ -11,7 +11,7 @@ import { combineReducers } from 'redux';
 import { SET_FORMULA, EMPTY_DATA, SET_DOMAIN, ADD_DOMAIN_ELEMENT,
          REMOVE_DOMAIN_ELEMENT, SET_VARIABLE_ASSIGNMENT, SET_PREDICATE_ASSIGNMENT,
          EMPTY_GAME, NEW_GAME, APPLY_GAME_STEP, SET_ACTIVE_FORMULA, EMPTY_ACTIVE_FORMULA,
-         SET_PLAYER } from 'Actions';
+         SET_PLAYER, SET_INFO_IS_VISIBLE, SET_INFO_CONTENT } from 'Actions';
 import Model from 'Purs/Model.purs';
 import GilesGame from 'Purs/GilesGame.purs';
 
@@ -22,6 +22,7 @@ const getEmptyGame = () => { return { gameState: GilesGame.emptyGameState, activ
 const initialData = getEmptyData();
 const initialGame = getEmptyGame();
 const initialPlayers = { player1: 'HUMAN', player2: 'HUMAN' };
+const initialUI = { infoIsVisible: false, infoContent: null };
 
 /**
  * Reducer for the "data" sub state.
@@ -112,10 +113,32 @@ const players = (state = initialPlayers, action) => {
 };
 
 /**
+ * Reducer for the "ui" sub state
+ *
+ * @param state The sub state to modify with the action.
+ * @param action The action which describes how to modify the state
+ * @returns {Object} The new state
+ */
+const ui = (state = initialUI, action) => {
+    let newState = Object.assign({}, state);
+
+    switch (action.type) {
+        case SET_INFO_IS_VISIBLE:
+            newState.infoIsVisible = action.isVisible;
+            break;
+        case SET_INFO_CONTENT:
+            newState.infoContent = action.content;
+            break;
+    }
+
+    return Object.assign({}, state, newState);
+};
+
+/**
  * Combines the sub reducers.
  *
  * @type {Reducer}
  */
-const reducer = combineReducers({ data, game, players });
+const reducer = combineReducers({ data, game, players, ui });
 
 export default reducer;

@@ -21,17 +21,36 @@ import 'Styles/App.scss';
  * Renders the complete app. This is the root component
  */
 export default class App extends React.Component {
+
+    static getInfoComponentName(content) {
+        let name = content.charAt(0).toUpperCase() + content.slice(1);
+        name += 'Info.jsx';
+
+        return name;
+    }
+
     render () {
+        let InfoComponent = null;
+        if (!!this.props.infoContent) {
+            InfoComponent = require('Infos/' + App.getInfoComponentName(this.props.infoContent)).default;
+        }
+
         return (
             <div className="app">
-                <Header/>
-                <Switch>
-                    <Route exact path="/" component={LandingPage} />
-                    <Route path="/about" component={AboutPage} />
-                    <Route path="/formula" component={FormulaPage} />
-                    <Route path="/model" component={ModelPage} />
-                    <Route path="/game" component={GamePage} />
-                </Switch>
+                <aside className={this.props.infoIsVisible ? 'visible' : 'hidden'}>
+                    <div onClick={this.props.hideInfoSidebar} className="close"/>
+                    {!!InfoComponent? <InfoComponent/> : null}
+                </aside>
+                <main>
+                    <Header/>
+                    <Switch>
+                        <Route exact path="/" component={LandingPage} />
+                        <Route path="/about" component={AboutPage} />
+                        <Route path="/formula" component={FormulaPage} />
+                        <Route path="/model" component={ModelPage} />
+                        <Route path="/game" component={GamePage} />
+                    </Switch>
+                </main>
             </div>
         );
     }

@@ -70,7 +70,8 @@ module.exports = {
             Purs: APP_DIR + '/purs',
             Actions: APP_DIR + '/state/actions',
             Validation: APP_DIR + '/validation',
-            Abstracts: APP_DIR + '/components/abstracts'
+            Abstracts: APP_DIR + '/components/abstracts',
+            Infos: APP_DIR + '/infos'
         }
     },
     plugins: [HtmlWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()]

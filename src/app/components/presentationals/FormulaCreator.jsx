@@ -9,6 +9,7 @@
 
 import React from 'react';
 import 'Styles/FormulaCreator.scss';
+import InfoLink from 'Containers/InfoLink.jsx';
 import Parser from 'Purs/Formula/Parser.purs';
 import Formula from 'Purs/Formula.purs';
 import Info from 'Purs/Formula/Info.purs';
@@ -134,10 +135,12 @@ export default class FormulaCreator extends React.Component {
                     <span onMouseDown={this.insertSymbol.bind(this, '\u22A4')}>&#8868;</span>
                     <span onMouseDown={this.insertSymbol.bind(this, '\u22A5')}>&#8869;</span>
                 </div>
-                <dl>
-                    <dt>Conventions:</dt>
-                    <dd>A...Z for predicates/propositions, a...t for constants, u...z for variables, strict bracketing</dd>
-                </dl>
+                <InfoLink infoKey="conventions">
+                    <dl>
+                        <dt>Conventions:</dt>
+                        <dd>A...Z for predicates/propositions, a...t for constants, u...z for variables, strict bracketing</dd>
+                    </dl>
+                </InfoLink>
             </div>
         );
     }
