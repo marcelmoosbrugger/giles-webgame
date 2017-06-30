@@ -14,8 +14,9 @@ import { createStore, compose } from 'redux';
 import persistState from 'redux-localstorage';
 import reducer from './state/reducers';
 import { AppContainer as HotLoaderContainer} from 'react-hot-loader';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from './components/presentationals/App.jsx';
+import Favicon from '../assets/img/favicon.png';
 
 // Create the redux state store
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -27,9 +28,10 @@ const renderApp = () => {
     render(
         <HotLoaderContainer>
             <ReduxContainer store={store}>
-                <BrowserRouter>
+                {/* Change HashRouter to BrowserRouter later */}
+                <HashRouter>
                     <App/>
-                </BrowserRouter>
+                </HashRouter>
             </ReduxContainer>
         </HotLoaderContainer>,
         document.getElementById('root')

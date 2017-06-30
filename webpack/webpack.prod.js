@@ -7,6 +7,7 @@
  * with this source code in the file LICENSE.
  */
 
+const webpack = require('webpack');
 const Merge = require('webpack-merge');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -35,5 +36,15 @@ module.exports = Merge(CommonConfig, {
             }
         ]
     },
-    plugins: [ExtractTextPluginConfig]
+    plugins: [
+        ExtractTextPluginConfig,
+        new webpack.optimize.UglifyJsPlugin({
+            mangle: {
+                // When checking if the result of a purscript function is for example of type 'Left'
+                // you do result.constructor.name === 'Left'. Therefore these function names must
+                // not be changed when uglifying the code.
+                except: ['Left', 'Right', 'DoNothing', 'Proponent', 'Opponent', 'Role']
+            }
+        })
+    ]
 });

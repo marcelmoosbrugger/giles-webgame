@@ -12,7 +12,7 @@
     "restart": "npm run reinstall && npm run start",
     "install:dependencies": "npm i --no-optional && bower install",
     "build:dev": "webpack --env=dev --progress --profile --colors",
-    "build:prod": "webpack --env=prod --progress --profile --colors --optimize-minimize --define process.env.NODE_ENV=\"'production'\"",
+    "build:prod": "webpack --env=prod --progress --profile --colors --define process.env.NODE_ENV=\"'production'\"",
     "repl:purs": "purs repl 'bower_components/purescript-*/src/**/*.purs' 'src/app/purs/**/*.purs'"
   },
   "author": "",

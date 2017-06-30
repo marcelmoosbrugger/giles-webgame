@@ -46,6 +46,11 @@ module.exports = {
                 loader: 'file-loader?name=fonts/[name].[ext]'
             },
             {
+                test: /\.png$/,
+                include: SRC_DIR,
+                loader: 'file-loader?name=img/[name].[ext]'
+            },
+            {
                 test: /\.purs$/,
                 loader: 'purs-loader',
                 exclude: /node_modules/,
