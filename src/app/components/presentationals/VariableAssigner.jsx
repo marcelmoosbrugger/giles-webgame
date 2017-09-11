@@ -9,6 +9,7 @@
 
 import React from 'react';
 import QuorumValidateable from 'Abstracts/QuorumValidatable';
+import InfoLink from 'Containers/InfoLink.jsx';
 import 'Styles/VariableAssigner.scss';
 
 /**
@@ -84,7 +85,9 @@ export default class VariableAssigner extends QuorumValidateable {
     render() {
         return (
             <div className="variable-assigner box">
-                <label>Free variables</label>
+                <InfoLink infoKey="freevariables">
+                    <label>Free variables</label>
+                </InfoLink>
                 <ul>
                     {this.props.variables.map(this.renderVariable.bind(this))}
                 </ul>

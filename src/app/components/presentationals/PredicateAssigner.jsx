@@ -10,6 +10,7 @@
 import React from 'react';
 import QuorumValidateable from 'Abstracts/QuorumValidatable';
 import 'Styles/PredicateAssigner.scss';
+import InfoLink from 'Containers/InfoLink.jsx';
 import Model from 'Purs/Model.purs';
 
 /**
@@ -105,9 +106,12 @@ export default class PredicateAssigner extends QuorumValidateable {
     render() {
         const combinations = Model.getAllArgsCombinations(this.props.elements)(this.props.predicate.arity);
         const label = this.props.predicate.arity > 0 ? 'Predicate' : 'Proposition';
+        const infoKey = this.props.predicate.arity > 0 ? 'predicate' : 'proposition';
         return (
             <div className="predicate-assigner box">
-                <label>{label} {this.props.predicate.name}</label>
+                <InfoLink infoKey={infoKey}>
+                    <label>{label} {this.props.predicate.name}</label>
+                </InfoLink>
                 {this.renderBody(combinations)}
             </div>
         );

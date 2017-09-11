@@ -8,5 +8,7 @@
  */
 
 .info-link {
-  cursor: help;
+    &, * {
+        cursor: help;
+    }
 }

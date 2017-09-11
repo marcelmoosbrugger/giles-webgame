@@ -9,6 +9,7 @@
 
 import React from 'react';
 import 'Styles/PlayersAssigner.scss';
+import InfoLink from "Containers/InfoLink.jsx";
 
 /**
  * Represents the the component which allows the user to assign the type of the players
@@ -24,7 +25,9 @@ export default class PlayersAssigner extends React.Component {
 
         return (
             <div className="player">
-                <label htmlFor={selectId}>Player {player}:</label>
+                <InfoLink infoKey="player">
+                    <label htmlFor={selectId}>Player {player}:</label>
+                </InfoLink>
                 <div className="select">
                     <select onChange={this.handleSelectChange.bind(this, player)} id={selectId} value={value}>
                         <option value="HUMAN">Human</option>

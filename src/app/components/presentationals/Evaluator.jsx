@@ -11,7 +11,9 @@ import React from 'react';
 import Lukasiewicz from 'Purs/Lukasiewicz.purs';
 import GilesGame from 'Purs/GilesGame.purs';
 import Parser from 'Purs/Formula/Parser.purs';
+import InfoLink from 'Containers/InfoLink.jsx';
 import 'Styles/Evaluator.scss';
+
 
 /**
  * Represents the component which allows the user
@@ -203,14 +205,18 @@ export default class Evaluator extends React.Component {
 
         return (
             <div className="evaluation">
-                <dl>
-                    <dt>Risk:</dt>
-                    <dd>Player 1: <em>{riskPlayer1}</em>, Player 2: <em>{riskPlayer2}</em></dd>
-                </dl>
-                <dl>
-                    <dt>Average Payment:</dt>
-                    <dd>Player 1: <em>{avgPayment1}</em>, Player 2: <em>{avgPayment2}</em></dd>
-                </dl>
+                <InfoLink infoKey="risk">
+                    <dl>
+                        <dt>Risk:</dt>
+                        <dd>Player 1: <em>{riskPlayer1}</em>, Player 2: <em>{riskPlayer2}</em></dd>
+                    </dl>
+                </InfoLink>
+                <InfoLink infoKey="payment">
+                    <dl>
+                        <dt>Average Payment:</dt>
+                        <dd>Player 1: <em>{avgPayment1}</em>, Player 2: <em>{avgPayment2}</em></dd>
+                    </dl>
+                </InfoLink>
                 <div className="buttons">
                     <div className="overlay">Execute random experiments</div>
                     <button onClick={this.executeExperiments.bind(this, 1)}>1 time</button>

@@ -11,6 +11,7 @@ import React from 'react';
 import 'Styles/Tenet.scss';
 import Parser from 'Purs/Formula/Parser.purs';
 import Formula from 'Purs/Formula/Info.purs';
+import InfoLink from 'Containers/InfoLink.jsx';
 
 /**
  * Represents a tenet containing formulae
@@ -69,8 +70,12 @@ export default class Tenet extends React.Component {
     render() {
         return (
             <div className={'box tenet' + (this.props.selectable ? ' selectable' : '')}>
-                <span className={'role ' + (this.props.role.toLowerCase())}>{this.props.role}</span>
-                <label>Tenet Player {this.props.player}</label>
+                <InfoLink infoKey="role">
+                    <span className={'role ' + (this.props.role.toLowerCase())}>{this.props.role}</span>
+                </InfoLink>
+                <InfoLink infoKey="tenet">
+                    <label>Tenet Player {this.props.player}</label>
+                </InfoLink>
                 {this.props.formulae.length > 0 ? this.renderFormulae() : Tenet.renderEmptyInfo()}
             </div>
         );

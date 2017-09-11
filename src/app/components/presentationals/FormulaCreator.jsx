@@ -112,7 +112,9 @@ export default class FormulaCreator extends React.Component {
     render() {
         return (
             <div className={'formula-creator' + (this.state.error === true ? " error" : (this.state.error === false) ? ' success' : '')}>
-                <label htmlFor="formula-input">Enter formula:</label>
+                <InfoLink infoKey="formula">
+                    <label htmlFor="formula-input">Enter formula:</label>
+                </InfoLink>
                 <div className="input-container">
                     <input ref="input"
                            type="text"

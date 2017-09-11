@@ -12,6 +12,7 @@ import 'Styles/GameStepper.scss';
 import Parser from 'Purs/Formula/Parser.purs';
 import GilesGame from 'Purs/GilesGame.purs';
 import Player from 'Purs/GilesGame/Player.purs';
+import InfoLink from 'Containers/InfoLink.jsx';
 
 /**
  * Represents the component which allows the users
@@ -128,9 +129,11 @@ export default class GameStepper extends React.Component {
 
         return (
             <div className="game-stepper">
-                <span className="description">Current formula:</span>
-                <span className="formula">{this.props.formula}</span>
-                {this.renderRole()}
+                <InfoLink infoKey="currentformula">
+                    <span className="description">Current formula:</span>
+                    <span className="formula">{this.props.formula}</span>
+                    {this.renderRole()}
+                </InfoLink>
                 <ul className="table-list">
                     {this.choice.value0.map(this.renderGameStep.bind(this))}
                 </ul>

@@ -11,6 +11,7 @@ import React from 'react';
 import QuorumValidateable from 'Abstracts/QuorumValidatable';
 import Parser from 'Purs/Formula/Parser.purs';
 import 'Styles/DomainCreator.scss';
+import InfoLink from "Containers/InfoLink.jsx";
 
 /**
  * Allows the user create a domain (set of elements) for a logical model
@@ -99,7 +100,9 @@ export default class DomainCreator extends QuorumValidateable {
     render() {
         return (
             <div className="domain-creator box">
-                <label htmlFor="domain-input">Domain</label>
+                <InfoLink infoKey="domain">
+                    <label htmlFor="domain-input">Domain</label>
+                </InfoLink>
                 <ul>
                     {this.props.domain.map((element, i) => {
                         let deletable = this.props.unremovables.indexOf(element) < 0;
