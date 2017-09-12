@@ -33,7 +33,7 @@ a {
   color: $highlightColor;
 }
 
-p {
+p, ul {
   @include serif-font;
   margin-bottom: 20px;
   font-size: 18px;

@@ -8,6 +8,32 @@
  */
 
 .about-page {
-  padding: 0 220px;
+  padding: 0 220px 100px 220px;
   margin: 0 auto;
+  max-width: 800px;
+  white-space: normal;
+
+  p, ul {
+    line-height: 30px;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  ul {
+    list-style-type: circle;
+    padding-left: 40px;
+  }
+
+  sub {
+    font-size: 12px;
+    position: relative;
+    top: 3px;
+  }
+
+  em {
+    font-weight: bold;
+    font-style: normal;
+  }
 }

@@ -23,7 +23,10 @@
   nav {
     text-align: center;
     text-transform: uppercase;
-    font-size: 100px;
+
+    ul {
+      font-size: 100px;
+    }
 
     li {
       line-height: 180px;
