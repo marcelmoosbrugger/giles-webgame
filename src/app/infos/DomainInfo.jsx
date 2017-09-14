@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Renders some information about the domain of a formula
@@ -15,7 +16,13 @@ import React from 'react';
 export default class DomainInfo extends React.Component {
     render () {
         return (
-            <div className="domain-info">Some info about the domain</div>
+            <div className="domain-info">
+                <p>
+                    The domain is the set of semantic elements for the previously defined formula.
+                    Domain elements are represented by arbitrary strings.
+                </p>
+                <Link to="/about">More information</Link>
+            </div>
         );
     }
 }

@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Renders some information about the propositions of a formula
@@ -15,7 +16,13 @@ import React from 'react';
 export default class PropositionInfo extends React.Component {
     render () {
         return (
-            <div className="proposition-info">Some info about propositions</div>
+            <div className="proposition-info">
+                <p>
+                    A proposition is just a special case of a predicate, namely one with zero arguments.
+                    Therefore, the semantic of the proposition is also a number between 0 and 1.
+                </p>
+                <Link to="/about">More information</Link>
+            </div>
         );
     }
 }

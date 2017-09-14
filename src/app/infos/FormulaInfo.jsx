@@ -8,6 +8,8 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 /**
  * Renders some information about the syntax of the formulae
@@ -15,7 +17,16 @@ import React from 'react';
 export default class FormulaInfo extends React.Component {
     render () {
         return (
-            <div className="formula-info">Some info about the formula</div>
+            <div className="formula-info">
+                <p>
+                    In a Giles's game there are always two players.
+                    Each player has a tenet which contains zero or more formulas.
+                    The game begins with a single formula - either propositional or first-order - in the
+                    tenet of the first player and no formulas in the tenet of the second player.
+                    The formula entered here is the one added to the tenet of the first player.
+                </p>
+                <Link to="/about">More information</Link>
+            </div>
         );
     }
 }

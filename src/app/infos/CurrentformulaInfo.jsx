@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Renders some information about the current formula of a game
@@ -15,7 +16,17 @@ import React from 'react';
 export default class CurrentformulaInfo extends React.Component {
     render () {
         return (
-            <div className="current-formula-info">Some info about the current formula</div>
+            <div className="current-formula-info">
+                <p>
+                    The current formula is a formula which was just picked from either the tenet of player 1
+                    or the tenet of player 2.
+                    The player from who's tenet the formula was taken acts as the proponent.
+                    The other player acts as the opponent.
+                    Depending on the outer connective of the formula a choice has the be made and
+                    the game continues in the resulting state.
+                </p>
+                <Link to="/about">More information</Link>
+            </div>
         );
     }
 }

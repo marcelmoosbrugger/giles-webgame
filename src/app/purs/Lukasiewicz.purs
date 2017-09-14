@@ -57,7 +57,7 @@ evaluateQuant m (Quant quantor v f) =
           allEvaluations = map (evaluate' m) substitues
 evaluateQuant _ _ = 0.0
 
--- | Evaluatesa predicate in a given model
+-- | Evaluates a predicate in a given model
 evaluatePred :: Model -> Formula -> Number
 evaluatePred m (Pred name args) = assignment.value
     where assignments = getPredicateAssignment name m

@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Renders some information about the payment after a game
@@ -15,7 +16,16 @@ import React from 'react';
 export default class PaymentInfo extends React.Component {
     render () {
         return (
-            <div className="payment-info">Some info about payments</div>
+            <div className="payment-info">
+                <p>
+                    If the binary experiments are actually executed, the outcome of the game may differ from
+                    the expected outcome.
+                </p>
+                <p>
+                    However, sooner or later the average payment converges to the risk.
+                </p>
+                <Link to="/about">More information</Link>
+            </div>
         );
     }
 }

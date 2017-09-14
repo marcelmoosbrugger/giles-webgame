@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Renders some information about the risk
@@ -15,7 +16,13 @@ import React from 'react';
 export default class RiskInfo extends React.Component {
     render () {
         return (
-            <div className="risk-info">Some info about risk</div>
+            <div className="risk-info">
+                <p>
+                    The risk for a player, is the expected amount of money she or he has to pay to the other player,
+                    based on the probabilities of the associated binary experiments.
+                </p>
+                <Link to="/about">More information</Link>
+            </div>
         );
     }
 }

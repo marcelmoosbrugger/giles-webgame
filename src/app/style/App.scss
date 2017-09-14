@@ -37,6 +37,34 @@ aside {
   position: relative;
   transition: width 200ms;
 
+  & > *:not(.close) {
+    padding: 90px 70px 0 20px;
+  }
+
+  * {
+    color: $neutralColor5;
+    @include serif-font;
+    white-space: normal;
+    line-height: 26px;
+    text-align: justify;
+  }
+
+  a {
+    color: $highlightColor;
+    font-size: 16px;
+    text-shadow: 0 0 lighten($highlightColor, 30%);
+    transition: text-shadow 200ms;
+
+    &:hover {
+      text-shadow: 0 0 lighten($highlightColor, 60%);
+    }
+  }
+
+  em {
+    font-weight: bold;
+    font-style: normal;
+  }
+
   &::after {
     content: "";
     width: 1px;

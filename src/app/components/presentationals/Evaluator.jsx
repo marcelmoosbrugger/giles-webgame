@@ -121,7 +121,9 @@ export default class Evaluator extends React.Component {
     renderTenet(player, tenet) {
         return (
             <div className="box tenet">
-                <label>Tenet Player {player}</label>
+                <InfoLink infoKey="finaltenet">
+                    <label>Tenet Player {player}</label>
+                </InfoLink>
                 {(() => {
                    if (tenet.length === 0) {
                        return <span className="no-formulae">The tenet is empty</span>

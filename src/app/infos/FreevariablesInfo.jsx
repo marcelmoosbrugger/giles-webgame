@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Renders some information about the free variables of a formula
@@ -15,7 +16,14 @@ import React from 'react';
 export default class FreevariablesInfo extends React.Component {
     render () {
         return (
-            <div className="free-variables-info">Some info about free variables</div>
+            <div className="free-variables-info">
+                <p>
+                    All variables which are not bound by a quantifier (&forall;, &exist;) have
+                    to be assigned with a single domain element.
+                    Another possibility is to quantify the variable in the original formula.
+                </p>
+                <Link to="/about">More information</Link>
+            </div>
         );
     }
 }

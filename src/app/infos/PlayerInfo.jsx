@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Renders some information about the player assignment
@@ -15,7 +16,16 @@ import React from 'react';
 export default class PlayerInfo extends React.Component {
     render () {
         return (
-            <div className="player-info">Some info about the player</div>
+            <div className="player-info">
+                <p>
+                    For both players it is possible to play them manually or to let them be played
+                    by the computer.
+                </p>
+                <p>
+                    All players handled by the computer are rational and play the best possible strategy for them.
+                </p>
+                <Link to="/about">More information</Link>
+            </div>
         );
     }
 }
