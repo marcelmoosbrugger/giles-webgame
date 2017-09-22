@@ -14,7 +14,7 @@ import { createStore, compose } from 'redux';
 import persistState from 'redux-localstorage';
 import reducer from './state/reducers';
 import { AppContainer as HotLoaderContainer} from 'react-hot-loader';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from 'Containers/App.jsx';
 import Favicon from '../assets/img/favicon.png';
 
@@ -28,9 +28,9 @@ const renderApp = () => {
     render(
         <HotLoaderContainer>
             <ReduxContainer store={store}>
-                <BrowserRouter>
+                <HashRouter>
                     <App/>
-                </BrowserRouter>
+                </HashRouter>
             </ReduxContainer>
         </HotLoaderContainer>,
         document.getElementById('root')

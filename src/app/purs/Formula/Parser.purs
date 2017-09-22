@@ -14,7 +14,7 @@ import Formula
 import Control.Alt ((<|>))
 import Data.Either (Either, isRight, fromRight)
 import Data.Array (fromFoldable, many)
-import Data.String (singleton)
+import Data.String (singleton, replaceAll, Pattern(Pattern), Replacement(Replacement))
 import Data.Foldable (fold)
 import Partial.Unsafe (unsafePartial)
 import Text.Parsing.Parser (Parser, ParseError, runParser, fail)
@@ -34,7 +34,12 @@ connectives      = ['\8743', '\0038', '\8744', '\8594']
 
 -- | Parsing functions
 parse :: String -> Either ParseError Formula
-parse f = runParser f inputFormula
+parse f = if isRight firstTry
+            then firstTry
+            else parse ("(" <> f <> ")")
+    where f' = replaceAll (Pattern " ") (Replacement "") f
+          firstTry = runParser f' inputFormula
+
 
 -- | Parses a formula unsafely
 unsafeParse :: String -> Formula
