@@ -45,4 +45,28 @@
       }
     }
   }
+
+  .hint {
+    position: absolute;
+    bottom: 40px;
+    margin: 0 auto;
+    @include sans-serif-font;
+    background: #fff;
+    font-size: 22px;
+    padding: 20px;
+    color: $neutralColor2;
+    max-width: 600px;
+    line-height: 32px;
+    white-space: normal;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 4px solid $mainColor1;
+
+    span {
+      float: left;
+      font-size: 45px;
+      opacity: 0.8;
+    }
+  }
 }

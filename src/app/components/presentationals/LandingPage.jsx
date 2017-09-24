@@ -23,6 +23,10 @@ export default class LandingPage extends React.Component {
     render() {
         return (
             <div className="landing-page">
+                <p className="hint">
+                    <span className="fa-lightbulb-o"/>
+                    Throughout the game, a click on words and concepts reveals additional information and hints.
+                </p>
                 <nav>
                     <ul>
                         <li><Link onClick={this.handleNewGameClick.bind(this)} to="/formula" >New game</Link></li>
