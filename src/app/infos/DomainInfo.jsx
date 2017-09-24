@@ -19,7 +19,10 @@ export default class DomainInfo extends React.Component {
             <div className="domain-info">
                 <p>
                     The domain is the set of semantic elements for the previously defined formula.
-                    Domain elements are represented by arbitrary strings.
+                    For every semantic element in the domain, there is a syntactic constant symbol.
+                    The element is identified by its symbol.
+                    Therefore the strings entered have to start with lower case letters a...t or with
+                    the numbers 0...9.
                 </p>
                 <Link to="/about">More information</Link>
             </div>

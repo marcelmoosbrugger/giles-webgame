@@ -22,13 +22,14 @@ import Text.Parsing.Parser.String (string, char, oneOf, eof)
 import Text.Parsing.Parser.Combinators (sepBy1, option)
 
 -- | Definiton of allowed symbols
+numbers     = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 uppercase   = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Ä','Ö','Ü']
 lowercaseAT = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','ö','ä','ü']
 lowercaseUZ = ['u','v','w','x','y','z']
 allChars    = uppercase <> lowercaseAT <> lowercaseUZ
 
 predicateSymbols = uppercase
-constantSymbols  = lowercaseAT
+constantSymbols  = lowercaseAT <> numbers
 variables        = lowercaseUZ
 connectives      = ['\8743', '\0038', '\8744', '\8594']
 
@@ -101,8 +102,8 @@ primed parser = do result <- parser unit
                    pure $ result <> (fold primes)
 
 constant = primed \_ -> do
-                head <- oneOf constantSymbols
-                tail <- many (oneOf allChars)
+                head <- oneOf (constantSymbols <> numbers)
+                tail <- many (oneOf (allChars <> numbers))
                 pure $ (singleton head) <> (fold $ map singleton tail)
 
 -- | Parser for predicate argument

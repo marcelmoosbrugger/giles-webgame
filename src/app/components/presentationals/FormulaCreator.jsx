@@ -140,7 +140,7 @@ export default class FormulaCreator extends React.Component {
                 <InfoLink infoKey="conventions">
                     <dl>
                         <dt>Conventions:</dt>
-                        <dd>A...Z for predicates/propositions, a...t for constants, u...z for variables, strict bracketing</dd>
+                        <dd>A...Z for predicates/propositions, a...t and 0...9 for constants, u...z for variables, strict bracketing</dd>
                     </dl>
                 </InfoLink>
             </div>

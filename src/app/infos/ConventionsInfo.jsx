@@ -20,7 +20,7 @@ export default class ConventionsInfo extends React.Component {
                 <p>
                     The syntax used for the formulas follows the one used in the main literature.
                     For predicate and proposition symbols uppercase letters are allowed.
-                    The lowercase letters <em>a</em> to <em>t</em> are reserved for constants.
+                    The lowercase letters <em>a</em> to <em>t</em> as well as numbers are reserved for constants.
                     There are no functions, as it's assumed that every element in the domain has
                     a corresponding constant symbol.
                     For variables, letters <em>u</em> to <em>z</em> can be used.
