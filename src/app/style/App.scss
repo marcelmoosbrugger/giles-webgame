@@ -32,7 +32,7 @@ aside {
   display: inline-block;
   vertical-align: top;
   box-shadow: inset -10px 0 25px -10px rgba(0,0,0,0.5);
-  overflow: hidden;
+  overflow: auto;
   box-sizing: border-box;
   position: relative;
   transition: width 200ms;
@@ -60,9 +60,24 @@ aside {
     }
   }
 
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  li {
+    padding-bottom: 10px;
+  }
+
   em {
     font-weight: bold;
     font-style: normal;
+  }
+
+  sub {
+    font-size: 12px;
+    position: relative;
+    top: 2px;
   }
 
   &::after {

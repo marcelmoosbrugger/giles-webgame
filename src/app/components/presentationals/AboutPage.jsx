@@ -91,6 +91,25 @@ export default class AboutPage extends React.Component {
                     The risk associated with a single atomic formula &alpha; can be denoted as <em>&lt;&alpha;&gt; </em>
                     and is equal to  <em>1 − e<sub>M</sub>(&alpha;)</em> (the probability that the experiment corresponding to &alpha; fails).
                 </p>
+                <h2>Syntax of formulas</h2>
+                <p>
+                    The set F of allowed formulas is defined as follows:
+                    <ul>
+                        <li>&#8868;&isin;F and &perp;&isin;F</li>
+                        <li>P&isin;F. P can be any uppercase character.</li>
+                        <li>P(v<sub>1</sub>,...,v<sub>n</sub>)&isin;F. P can be any uppercase character,
+                            v<sub>1</sub> to v<sub>n</sub> have to variable or constant symbols (see conventions).</li>
+                        <li>&not;&alpha;&isin;F if &alpha;&isin;F</li>
+                        <li>(&alpha;&loz;&beta;) if &alpha;,&beta;&isin;F and &loz; is one of: &amp;, &and;, &or;, &rarr;</li>
+                        <li>&forall;x&alpha;&isin;F and &exist;x&alpha;&isin;F if &alpha;&isin;F and x is a variable symbol (see conventions).</li>
+                    </ul>
+                </p>
+                <h2>Conventions</h2>
+                <ul>
+                    <li>The characters A...Z represent predicate or a proposition symbols. The symbols can be primed.</li>
+                    <li>The characters u...z represent variable symbols. The symbols can be primed.</li>
+                    <li>Constant symbols have to begin with a...t or 0...9. The symbols can be primed.</li>
+                </ul>
             </div>
         );
     }

@@ -27,7 +27,8 @@ export default class ConventionsInfo extends React.Component {
                     All symbols can be followed by arbitrary primes <em>'</em>.
                 </p>
                 <p>
-                    At has to be mentioned that the bracketing is strict and no brackets can be omitted.
+                    At has to be mentioned that the bracketing is strict and no brackets can be omitted,
+                    except the outermost brackets.
                 </p>
                 <Link to="/about">More information</Link>
             </div>
