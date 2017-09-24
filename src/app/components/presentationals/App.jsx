@@ -22,6 +22,25 @@ import 'Styles/App.scss';
  */
 export default class App extends React.Component {
 
+    constructor() {
+        super();
+        this.handleGlobalKeyDown = this.handleGlobalKeyDown.bind(this);
+    }
+
+    componentDidMount() {
+        window.addEventListener('keydown', this.handleGlobalKeyDown);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleGlobalKeyDown);
+    }
+
+    handleGlobalKeyDown(event) {
+        if (event.keyCode === 27) {
+            this.props.hideInfoSidebar();
+        }
+    }
+
     static getInfoComponentName(content) {
         let name = content.charAt(0).toUpperCase() + content.slice(1);
         name += 'Info.jsx';
