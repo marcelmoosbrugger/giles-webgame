@@ -42,6 +42,13 @@
     max-width: 800px;
     white-space: normal;
     margin: 0 auto;
+
+    span {
+      float: left;
+      font-size: 32px;
+      padding-top: 2px;
+      opacity: 0.8;
+    }
   }
 
   .thin {

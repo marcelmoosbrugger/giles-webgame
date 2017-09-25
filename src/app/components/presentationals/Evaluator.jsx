@@ -225,6 +225,7 @@ export default class Evaluator extends React.Component {
                     <button onClick={this.executeExperiments.bind(this, 10)}>10 times</button>
                 </div>
                 <p className="hint">
+                    <span className="fa-lightbulb-o"/>
                     The individual outcomes of the game can be clicked on.
                     The colors of the atomic formulas in the tenets illustrate whether or not
                     the associated experiment was successful (green) or failed (red).
