@@ -110,6 +110,13 @@ export default class AboutPage extends React.Component {
                     <li>The characters u...z represent variable symbols. The symbols can be primed.</li>
                     <li>Constant symbols have to begin with a...t or 0...9. The symbols can be primed.</li>
                 </ul>
+                <h2>Thesis</h2>
+                <p>
+                    This web implementation of Giles's game was constructed together with my bachelor's thesis at
+                    the technical university of vienna under the supervision of Univ.-Prof. Dr. Christian Fermüller.
+                    The whole thesis, which provides additional information about fuzzy logic and this implementation
+                    can be found <a href="thesis.pdf">here</a>.
+                </p>
             </div>
         );
     }
